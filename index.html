@@ -1,20 +1,95 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First Website</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HarmonyWheel</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: #101018;
+      color: #f5f5fa;
+      font-family: Arial, sans-serif;
+    }
+
+    main {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 100px 24px;
+    }
+
+    h1 {
+      font-size: clamp(48px, 9vw, 88px);
+      margin-bottom: 20px;
+      color: #ad96ff;
+    }
+
+    p {
+      font-size: 20px;
+      line-height: 1.7;
+      color: #c4c4d4;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 24px;
+      padding: 18px 28px;
+      background: #ad96ff;
+      color: #101018;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 12px;
+    }
+
+    .button:hover {
+      background: #c5b5ff;
+    }
+
+    .features {
+      margin-top: 70px;
+      padding: 28px;
+      background: #1c1c2b;
+      border: 1px solid #35354d;
+      border-radius: 18px;
+    }
+
+    li {
+      margin: 16px 0;
+      color: #c4c4d4;
+      font-size: 18px;
+    }
+  </style>
 </head>
+
 <body>
-    <h1>Welcome to My Website!</h1>
+  <main>
+    <p>Music at your fingertips</p>
 
-    <p>This is my first HTML webpage.</p>
+    <h1>HarmonyWheel</h1>
 
-    <h2>About Me</h2>
-    <p>I'm learning how to build websites using HTML.</p>
+    <p>
+      Turn hand movements into music. Explore chords,
+      layer sounds, build drum beats, and watch your
+      performance come alive with reactive visuals.
+    </p>
 
-    <a href="https://www.google.com">Visit Google</a>
+    <!-- Replace this address with your GitHub Releases URL. -->
+    <a class="button"
+       href="https://github.com/YOUR-USERNAME/YOUR-REPOSITORY/releases/latest">
+      Download for Windows
+    </a>
+
+    <section class="features">
+      <h2>Create your own sound</h2>
+
+      <ul>
+        <li>Control notes and chords with hand tracking</li>
+        <li>Hold and layer sounds using pinch gestures</li>
+        <li>Build beats with the drum sequencer</li>
+        <li>Explore colorful music-reactive visuals</li>
+      </ul>
+    </section>
+  </main>
 </body>
 </html>
-
