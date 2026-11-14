@@ -1,95 +1,1823 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>HarmonyWheel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Website V1.0</title>
 
-  <style>
-    body {
-      margin: 0;
-      background: #101018;
-      color: #f5f5fa;
-      font-family: Arial, sans-serif;
+    <style>
+
+
+/* Content stays visible unless JavaScript enables the animation. */
+.reveal {
+    opacity: 1;
+    transform: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .reveal-ready .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
     }
 
-    main {
-      max-width: 850px;
-      margin: 0 auto;
-      padding: 100px 24px;
+    .reveal-ready .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+    
+body {
+    margin: 0;
+    background-color: #f5f3ef;
+    color: #242424;
+    font-family: Georgia, serif;
+}
+
+
+.listening-card {
+    max-width: 560px;
+    margin-top: 36px;
+    padding: 24px;
+    background: #15131a;
+    border: 1px solid #3c303a;
+    border-radius: 16px;
+}
+
+.listening-card h2 {
+    margin: 0 0 18px;
+    font-size: 24px;
+    font-weight: normal;
+}
+
+#spotify-status {
+    margin: 0;
+    color: #d0c5ce;
+}
+
+#spotify-track:not([hidden]) {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    color: #eee7e3;
+    text-decoration: none;
+}
+
+#spotify-artwork {
+    flex-shrink: 0;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+#spotify-track div {
+    min-width: 0;
+}
+
+#spotify-track strong,
+#spotify-track span {
+    display: block;
+    overflow-wrap: anywhere;
+}
+
+#spotify-artist {
+    margin-top: 6px;
+    color: #d0c5ce;
+}
+
+.spotify-open {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #9bd8b0;
+}
+
+#spotify-track:hover strong {
+    text-decoration: underline;
+}
+
+#spotify-track:focus-visible {
+    outline: 2px solid #9bd8b0;
+    outline-offset: 6px;
+}
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 40px 25px;
+    box-sizing: border-box;
+    border-right: 1px solid #d4d0c8;
+}
+
+.sidebar h2 {
+    font-size: 22px;
+    font-weight: normal;
+    letter-spacing: 2px;
+}
+
+.sidebar button {
+    display: block;
+    width: 100%;
+    padding: 15px 0;
+    border: none;
+    background: transparent;
+    color: #555;
+    font-family: Georgia, serif;
+    font-size: 16px;
+    text-align: left;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background-color 0.2s, color 0.2s, padding-left 0.2s;
+}
+
+.sidebar button:hover {
+    background-color: #d8d8d8;
+    color: #000;
+    padding-left: 8px;
+   
+}
+
+.content {
+    margin-left: 250px;
+    padding: 80px 8%;
+}
+
+h1 {
+    font-size: 48px;
+    font-weight: normal;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+
+/* INTERNSHIP CONTACT: edit these styles to change the contact section. */
+.contact-card {
+    max-width: 760px;
+    margin: 36px 0 44px;
+    padding: clamp(24px, 4vw, 40px);
+    box-sizing: border-box;
+    border: 1px solid #d4d0c8;
+    background: #eeebe5;
+}
+
+.contact-card .contact-eyebrow {
+    margin: 0 0 14px;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #59554e;
+}
+
+.contact-card h2 {
+    margin: 0 0 16px;
+    font-size: clamp(28px, 4vw, 36px);
+    font-weight: normal;
+}
+
+.contact-card .contact-description {
+    margin: 0;
+    max-width: 62ch;
+    font-size: 17px;
+    color: #514d46;
+}
+
+.contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.contact-link {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 14px 18px;
+    border: 1px solid #34322e;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.contact-link-primary {
+    background: #34322e;
+    color: #fff;
+}
+
+.contact-link-primary:hover {
+    background: #514d46;
+}
+
+.contact-link-secondary {
+    background: transparent;
+    color: #34322e;
+}
+
+.contact-link-secondary:hover {
+    background: #d8d8d8;
+}
+
+.contact-link:focus-visible {
+    outline: 2px solid #34322e;
+    outline-offset: 4px;
+}
+
+.contact-card .contact-address {
+    margin: 18px 0 0;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #59554e;
+    overflow-wrap: anywhere;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* RESUME: place resume.pdf beside index.html to fill this preview. */
+.resume-card { max-width: 900px; }
+.resume-preview {
+    display: block;
+    width: 100%;
+    height: 720px;
+    height: clamp(360px, 75vh, 850px);
+    margin-top: 24px;
+    border: 1px solid #d4d0c8;
+    box-sizing: border-box;
+    background: #fff;
+}
+.resume-preview p { padding: 24px; }
+
+/* STATEMENT BOXES: shared styling for artist and project statements. */
+.statement-box {
+    max-width: 900px;
+    box-sizing: border-box;
+    margin: 0 0 36px;
+    padding: clamp(22px, 4vw, 36px);
+    border: 1px solid #d4d0c8;
+    background: #eeebe5;
+}
+
+.statement-box h2 {
+    margin: 0 0 16px;
+    font-size: 26px;
+    font-weight: normal;
+}
+
+.statement-box p {
+    max-width: 65ch;
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.8;
+    color: #514d46;
+    overflow-wrap: anywhere;
+}
+
+.statement-box p + p {
+    margin-top: 16px;
+}
+
+/* ART PORTFOLIO: adjust the gallery spacing and caption appearance here. */
+.portfolio-intro {
+    max-width: 640px;
+    margin: 0 0 48px;
+    color: #666159;
+}
+
+.art-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: 48px 32px;
+}
+
+.artwork {
+    margin: 0;
+    min-width: 0;
+}
+
+.artwork-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 4 / 5;
+    background: #eae7e1;
+    text-decoration: none;
+    overflow: hidden;
+}
+
+.artwork-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.artwork-image:focus-visible {
+    outline: 2px solid #555;
+    outline-offset: 5px;
+}
+
+.artwork figcaption {
+    padding-top: 18px;
+    border-bottom: 1px solid #d4d0c8;
+    padding-bottom: 20px;
+}
+
+.artwork-title {
+    margin: 0 0 12px;
+    font-size: 21px;
+    font-weight: normal;
+    line-height: 1.4;
+}
+
+.artwork-details {
+    display: grid;
+    grid-template-columns: 65px minmax(0, 1fr);
+    gap: 6px 12px;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.artwork-details dt {
+    color: #787269;
+}
+
+.artwork-details dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+.artwork-status {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 4px 10px;
+    background: #e3dfd7;
+    color: #5d584f;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+}
+
+@media (max-width: 700px) {
+    .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        padding: 24px;
+        border-right: none;
+        border-bottom: 1px solid #d4d0c8;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
     }
 
-    h1 {
-      font-size: clamp(48px, 9vw, 88px);
-      margin-bottom: 20px;
-      color: #ad96ff;
+    .sidebar h2 {
+        width: 100%;
     }
 
-    p {
-      font-size: 20px;
-      line-height: 1.7;
-      color: #c4c4d4;
+    .sidebar button {
+        width: auto;
+        flex: 1 1 120px;
+        padding: 12px 8px;
     }
 
-    .button {
-      display: inline-block;
-      margin-top: 24px;
-      padding: 18px 28px;
-      background: #ad96ff;
-      color: #101018;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 12px;
+    .content {
+        margin-left: 0;
+        padding: 36px 24px;
     }
 
-    .button:hover {
-      background: #c5b5ff;
+    .art-gallery {
+        gap: 36px 24px;
     }
+}
 
-    .features {
-      margin-top: 70px;
-      padding: 28px;
-      background: #1c1c2b;
-      border: 1px solid #35354d;
-      border-radius: 18px;
-    }
+/* MUSIC: change these colors to customize this tab. */
+.music-panel {
+    --music-background: #eeebe5;
+    --music-ink: #34322e;
+    --music-button: #f5f3ef;
+    max-width: 820px;
+    padding: clamp(20px, 4vw, 40px);
+    background: var(--music-background);
+    color: var(--music-ink);
+    border: 1px solid #d4d0c8;
+    border-radius: 20px;
+}
+.music-panel h2 { margin: 0 0 24px; font-size: 30px; font-weight: normal; }
+.music-panel h3 { margin: 30px 0 16px; font-size: 21px; font-weight: normal; }
+.spotify-player { display: block; border: 0; border-radius: 12px; }
+.music-outlets { display: grid; gap: 12px; }
+.music-outlets a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 22px;
+    background: var(--music-button);
+    color: var(--music-ink);
+    border: 1px solid #d4d0c8;
+    border-radius: 12px;
+    font-family: Arial, sans-serif;
+    text-decoration: none;
+    transition: background-color .2s;
+}
+.music-outlets a:hover { background: #d8d8d8; }
+.music-outlets a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
 
-    li {
-      margin: 16px 0;
-      color: #c4c4d4;
-      font-size: 18px;
+/* Dark theme is active only while the Music tab is open. */
+body.music-active { background: #09090d; color: #eee7e3; color-scheme: dark; }
+body.music-active .sidebar { background: #0e0d12; border-color: #30232a; }
+body.music-active .sidebar button { color: #c8bcc2; }
+body.music-active .sidebar button:hover { background: #363238; color: #fff; }
+body.music-active .sidebar h2 { color: #eee7e3; }
+body.music-active .music-panel {
+    --music-background: #111015;
+    --music-ink: #eee7e3;
+    --music-button: #1b1820;
+    max-width: 1100px;
+    border-color: #37252d;
+    background: linear-gradient(145deg, #241014 0%, #111015 45%, #0d1a29 100%);
+}
+body.music-active .music-outlets a { border-color: #44343d; }
+body.music-active .music-outlets a:hover { background: #363238; }
+/* Let the artwork define the layout instead of enclosing it in a card. */
+body.music-active .music-panel {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+}
+.music-artwork {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(16px, 3vw, 32px);
+    margin: 0 0 40px;
+}
+.music-artwork figure {
+    margin: 0;
+    min-width: 0;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: 0 16px 40px -20px rgba(0, 0, 0, .8);
+}
+.music-artwork img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    object-fit: cover;
+    background: transparent;
+}
+@media (max-width: 800px) {
+    .music-artwork { grid-template-columns: 1fr; gap: 24px; }
+}
+
+/* Every page shares the dark palette. */
+body.dark-theme { background: #09090d; color: #eee7e3; color-scheme: dark; }
+body.dark-theme .sidebar { background: #0e0d12; border-color: #30232a; }
+body.dark-theme .sidebar h2 { color: #eee7e3; }
+body.dark-theme .sidebar button { color: #c8bcc2; }
+body.dark-theme .sidebar button:hover { background: #363238; color: #fff; }
+body.dark-theme .sidebar button:focus-visible { outline: 2px solid #c8bcc2; outline-offset: 3px; }
+body.dark-theme .content a { color: #b9d7f2; }
+body.dark-theme .contact-card,
+body.dark-theme .statement-box { background: #15131a; border-color: #3c303a; }
+body.dark-theme .contact-card .contact-eyebrow,
+body.dark-theme .contact-card .contact-address { color: #bfb3be; }
+body.dark-theme .contact-card .contact-description,
+body.dark-theme .statement-box p { color: #d0c5ce; }
+body.dark-theme .contact-link { border-color: #786774; }
+body.dark-theme .contact-link-primary { background: #e5dbe2; color: #19151b; }
+body.dark-theme .contact-link-primary:hover { background: #fff0f7; }
+body.dark-theme .contact-link-secondary { color: #eee7e3; }
+body.dark-theme .contact-link-secondary:hover { background: #363238; }
+body.dark-theme .contact-link:focus-visible { outline-color: #eee7e3; }
+body.dark-theme .resume-preview { background: #15131a; border-color: #3c303a; }
+body.dark-theme .music-outlets a { color: var(--music-ink); }
+
+/* Art Portfolio: black gallery surfaces and readable captions. */
+body.dark-theme #art { color: #eee7e3; }
+body.dark-theme .portfolio-intro { color: #d0c5ce; }
+body.dark-theme .artwork-image { background: #09090d; }
+body.dark-theme .artwork figcaption { border-color: #3c303a; }
+body.dark-theme .artwork-title { color: #eee7e3; }
+body.dark-theme .artwork-details dt { color: #bfb3be; }
+body.dark-theme .artwork-details dd { color: #d0c5ce; }
+body.dark-theme .artwork-image:focus-visible { outline-color: #eee7e3; }
+
+/* HOME PRISM: self-contained illustration; no libraries required. */
+
+.prism-scene svg { display: block; width: 100%; height: 100%; }
+.prism-hint {
+    position: absolute; bottom: 16px; left: 16px; right: 16px;
+    margin: 0; text-align: center; font: 11px/1.5 Arial, sans-serif;
+    letter-spacing: .14em; text-transform: uppercase; color: #a8a0ae;
+    pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) { .prism-hint { display: none; } }
+
+/* Horizontal navigation: wraps naturally on smaller screens. */
+.sidebar.top-navigation {
+    position: sticky;
+    top: 0;
+    left: auto;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    width: 100%;
+    height: auto;
+    padding: 16px clamp(20px, 4vw, 64px);
+    border-right: 0;
+    border-bottom: 1px solid #30232a;
+}
+.sidebar.top-navigation h2 {
+    width: auto;
+    flex: 0 0 auto;
+    margin: 0 auto 0 0;
+    padding: 10px 24px 10px 0;
+    font-size: 20px;
+}
+.sidebar.top-navigation button {
+    display: inline-block;
+    flex: 0 1 auto;
+    width: auto;
+    padding: 12px 16px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 15px;
+}
+.sidebar.top-navigation button:hover { padding-left: 16px; }
+.content {
+    margin-left: 0;
+    max-width: 1400px;
+    margin-right: auto;
+    margin-left: auto;
+    box-sizing: border-box;
+    padding: clamp(32px, 5vw, 72px) clamp(20px, 6vw, 88px);
+}
+@media (max-width: 800px) {
+    .sidebar.top-navigation { position: relative; gap: 4px; padding: 12px 16px; }
+    .sidebar.top-navigation h2 { width: 100%; padding: 8px; }
+    .sidebar.top-navigation button { padding: 10px 12px; font-size: 14px; }
+    .sidebar.top-navigation button:hover { padding-left: 12px; }
+}
+
+/* Matte palette: soft charcoal surfaces, muted text, minimal edges. */
+body.dark-theme {
+    background: #0d0e0f;
+    color: #dedbd5;
+}
+body.dark-theme .sidebar,
+body.dark-theme .sidebar.top-navigation {
+    background: #242526;
+    border: 0;
+    box-shadow: none;
+}
+body.dark-theme .sidebar h2 { color: #dedbd5; }
+body.dark-theme .sidebar button { color: #bebbb6; }
+body.dark-theme .sidebar button:hover { background: #333435; color: #eeeae3; }
+body.dark-theme .contact-card,
+body.dark-theme .statement-box,
+body.dark-theme .listening-card {
+    background: #292a2b;
+    border: 0;
+    border-radius: 14px;
+    box-shadow: none;
+}
+body.dark-theme .contact-card .contact-description,
+body.dark-theme .statement-box p,
+body.dark-theme .portfolio-intro,
+body.dark-theme .artwork-details dd,
+body.dark-theme #spotify-status,
+body.dark-theme #spotify-artist { color: #c2beb8; }
+body.dark-theme .contact-card .contact-eyebrow,
+body.dark-theme .contact-card .contact-address,
+body.dark-theme .artwork-details dt { color: #aaa69f; }
+body.dark-theme .content a { color: #b7c7ce; }
+body.dark-theme .contact-link { border-color: transparent; border-radius: 8px; }
+body.dark-theme .contact-link-primary { background: #c9c6bf; color: #282929; }
+body.dark-theme .contact-link-primary:hover { background: #ddd9d1; }
+body.dark-theme .contact-link-secondary { background: #343536; color: #dedbd5; }
+body.dark-theme .contact-link-secondary:hover { background: #404142; }
+body.dark-theme .music-panel {
+    --music-ink: #dedbd5;
+    --music-button: #2b2c2d;
+    background: transparent;
+    border: 0;
+}
+body.dark-theme .music-outlets a { border: 0; color: #dedbd5; }
+body.dark-theme .music-outlets a:hover { background: #38393a; }
+body.dark-theme .music-artwork figure { box-shadow: none; border-radius: 8px; }
+body.dark-theme .artwork-image { background: #292a2b; border-radius: 8px; }
+body.dark-theme .artwork figcaption { border: 0; }
+body.dark-theme #art,
+body.dark-theme .artwork-title { color: #dedbd5; }
+body.dark-theme .resume-preview { background: #292a2b; border: 0; border-radius: 8px; }
+
+.prism-hint { color: #aaa69f; }
+#prism-beam { opacity: .28; }
+#prism-glow { opacity: .65; }
+body.dark-theme #spotify-track { color: #dedbd5; }
+body.dark-theme .spotify-open { color: #aec3b1; }
+
+/* Reference-inspired edge lighting: no solid beam or white triangle. */
+
+.prism-scene svg { width: 100%; height: 100%; overflow: visible; }
+.prism-hint { color: #918f92; font-size: 10px; opacity: .7; }
+
+/* Blend the triangle directly into the page with no enclosing frame. */
+
+
+/* Blend the triangle directly into the page with no enclosing frame. */
+
+
+/* Unframed prism: allow the diffuse light to fade beyond its layout area. */
+#prism-scene {
+    position: relative;
+    width: 100%;
+    height: clamp(320px, 48vw, 560px);
+    margin: 0 0 40px;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    outline: 0;
+    box-shadow: none;
+    overflow: visible;
+}
+#prism-scene > svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    background: none;
+    border: 0;
+    box-shadow: none;
+    pointer-events: none;
+}
+
+/* Black site palette with quiet gray surfaces and soft white text. */
+body.dark-theme { background: #000; color: #ededed; }
+body.dark-theme .sidebar,
+body.dark-theme .sidebar.top-navigation { background: #080808; border: 0; }
+body.dark-theme .sidebar h2,
+body.dark-theme #art,
+body.dark-theme .artwork-title { color: #ededed; }
+body.dark-theme .sidebar button { color: #b3b3b3; }
+body.dark-theme .sidebar button:hover { background: #202020; color: #fff; }
+body.dark-theme .contact-card,
+body.dark-theme .statement-box,
+body.dark-theme .listening-card,
+body.dark-theme .artwork-image,
+body.dark-theme .resume-preview { background: #101010; border: 0; }
+body.dark-theme .contact-card .contact-description,
+body.dark-theme .statement-box p,
+body.dark-theme .portfolio-intro,
+body.dark-theme .artwork-details dd,
+body.dark-theme #spotify-status,
+body.dark-theme #spotify-artist { color: #b5b5b5; }
+body.dark-theme .contact-card .contact-eyebrow,
+body.dark-theme .contact-card .contact-address,
+body.dark-theme .artwork-details dt { color: #999; }
+body.dark-theme .content a { color: #ddd; }
+body.dark-theme .contact-link-primary { background: #ededed; color: #111; }
+body.dark-theme .contact-link-primary:hover { background: #fff; }
+body.dark-theme .contact-link-secondary { background: #202020; color: #ededed; }
+body.dark-theme .contact-link-secondary:hover { background: #303030; }
+body.dark-theme .music-panel { --music-ink: #ededed; --music-button: #141414; }
+body.dark-theme .music-outlets a { color: #ededed; }
+body.dark-theme .music-outlets a:hover { background: #252525; }
+body.dark-theme #spotify-track { color: #ededed; }
+body.dark-theme .spotify-open { color: #b3c9ba; }
+body.dark-theme #prism-scene { background: transparent; cursor: default; }
+#halo-face { fill: #000; }
+
+/* Proximity glow and a directly clickable triangle. */
+#halo-face { pointer-events: auto; cursor: pointer; }
+#halo-face:focus-visible { outline: none; stroke: #ddd; stroke-width: 2; }
+#halo-light { pointer-events: none; }
+/* SVG focus outlines follow its rectangular bounds; use its actual path instead. */
+#halo-face:focus,
+#halo-face:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+}
+#halo-face:focus:not(:focus-visible) { stroke: none; }
+#halo-face:focus-visible { stroke: #ddd; stroke-width: 2; }
+
+/* Shared sticky header keeps Spotify visible across pages and while scrolling. */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 12px clamp(16px, 3vw, 40px);
+    background: #080808;
+}
+.site-header .sidebar.top-navigation {
+    position: static;
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+    padding: 0;
+}
+.site-header .sidebar.top-navigation h2 { padding-right: 12px; }
+body.dark-theme .site-header .listening-card {
+    flex: 0 0 250px;
+    width: 250px;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0 0 0 auto;
+    padding: 10px 12px;
+    background: #111;
+    border: 0;
+    border-radius: 10px;
+}
+.site-header .listening-card h2 {
+    margin: 0 0 7px;
+    font: 11px/1.4 Arial, sans-serif;
+    letter-spacing: .06em;
+    color: #aaa;
+}
+.site-header #spotify-track:not([hidden]) { gap: 10px; }
+.site-header #spotify-artwork { width: 40px; height: 40px; border-radius: 5px; }
+.site-header #spotify-title,
+.site-header #spotify-artist {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font: 12px/1.5 Arial, sans-serif;
+}
+.site-header #spotify-title { font-weight: 600; }
+.site-header #spotify-artist { margin-top: 1px; }
+.site-header #spotify-status { font: 12px/1.5 Arial, sans-serif; }
+.site-header .spotify-open { display: none !important; }
+@media (max-width: 700px) {
+    .site-header { flex-wrap: wrap; gap: 12px; padding: 12px 16px; }
+    .site-header .sidebar.top-navigation { flex-basis: 100%; }
+    body.dark-theme .site-header .listening-card { flex-basis: 250px; }
+}
+
+/* Spotify blends into the header without an enclosing card. */
+body.dark-theme .site-header .listening-card {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 4px 0 4px 12px;
+    flex-basis: 220px;
+    width: 220px;
+}
+.site-header .listening-card h2 {
+    margin-bottom: 4px;
+    font-size: 10px;
+    letter-spacing: .04em;
+    color: #888;
+}
+.site-header #spotify-track:not([hidden]) { gap: 9px; }
+.site-header #spotify-artwork { width: 32px; height: 32px; border-radius: 3px; }
+.site-header #spotify-title { font-size: 12px; line-height: 1.35; }
+.site-header #spotify-artist { font-size: 11px; line-height: 1.35; color: #999; }
+@media (max-width: 700px) {
+    body.dark-theme .site-header .listening-card { flex-basis: 220px; }
+}
+
+/* Keep tabs together instead of allowing individual buttons to scatter. */
+.site-header { flex-wrap: nowrap; gap: 24px; }
+.site-header .sidebar.top-navigation {
+    display: flex;
+    flex-wrap: nowrap;
+    flex: 1 1 auto;
+    align-items: center;
+    gap: 20px;
+}
+.site-header .sidebar.top-navigation h2 {
+    width: auto;
+    margin: 0;
+    padding: 8px 0;
+    white-space: nowrap;
+}
+.nav-links {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 4px;
+    min-width: 0;
+    margin-left: auto;
+}
+.site-header .nav-links button {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    padding: 10px 12px;
+}
+.site-header .nav-links button:hover { padding-left: 12px; }
+@media (max-width: 1200px) {
+    .site-header {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 220px);
+        gap: 12px 16px;
+        padding: 12px 20px;
     }
-  </style>
+    .site-header .sidebar.top-navigation { display: contents; }
+    .site-header .sidebar.top-navigation h2 {
+        grid-column: 1;
+        grid-row: 1;
+        min-width: 0;
+        font-size: 18px;
+        white-space: normal;
+    }
+    body.dark-theme .site-header .listening-card {
+        grid-column: 2;
+        grid-row: 1;
+        width: 100%;
+        min-width: 0;
+        margin: 0;
+        padding: 0;
+    }
+    .nav-links {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        width: 100%;
+        margin: 0;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        scrollbar-width: thin;
+        scrollbar-color: #333 transparent;
+        padding: 3px 0 6px;
+    }
+}
+@media (max-width: 480px) {
+    .site-header {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 170px);
+        padding: 10px 14px;
+        gap: 8px 12px;
+    }
+    .site-header .sidebar.top-navigation h2 { font-size: 16px; letter-spacing: 1px; }
+    .site-header .nav-links button { font-size: 13px; padding: 10px; }
+    .site-header .nav-links button:hover { padding-left: 10px; }
+}
+
+/* Home: reveal the introduction on a subtly lighter gray surface. */
+.content { --content-gutter: clamp(20px, 6vw, 88px); }
+#home #prism-scene { min-height: min(72svh, 760px); margin-bottom: 64px; }
+.about-section {
+    margin: 0 calc(-1 * var(--content-gutter));
+    padding: clamp(48px, 7vw, 100px) var(--content-gutter);
+    background: #141414;
+}
+.about-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    align-items: center;
+    gap: clamp(32px, 6vw, 88px);
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.about-photo {
+    display: block;
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    border-radius: 8px;
+}
+.about-copy h2 {
+    margin: 0 0 24px;
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: normal;
+    color: #ededed;
+}
+.about-copy p { margin: 0 0 20px; max-width: 48ch; color: #b5b5b5; }
+.about-copy p:last-child { margin-bottom: 0; }
+@media (max-width: 700px) {
+    .about-layout { grid-template-columns: 1fr; gap: 32px; }
+    .about-photo { max-width: 360px; }
+    #home #prism-scene { min-height: 60svh; margin-bottom: 40px; }
+}
+
+/* Fade the entire gray surface together with its contents. */
+@media (prefers-reduced-motion: no-preference) {
+    .reveal-ready .about-section.reveal {
+        transform: none;
+        transition: opacity 1s ease;
+    }
+}
+
+/* Soft dissolve: feather the surface, then reveal picture, heading, and copy. */
+.about-section {
+    position: relative;
+    isolation: isolate;
+    background: transparent;
+    padding-top: clamp(96px, 12vw, 160px);
+}
+.about-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(to bottom, transparent 0%, #101010 100px, #181818 240px);
+    pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+    .about-dissolve-ready .about-section::before {
+        opacity: 0;
+        transition: opacity 1.6s ease;
+    }
+    .about-dissolve-ready .about-photo,
+    .about-dissolve-ready .about-copy > * {
+        opacity: 0;
+        transform: none;
+        transition: opacity 1.4s ease;
+    }
+    .about-dissolve-ready .about-section.about-visible::before,
+    .about-dissolve-ready .about-visible .about-photo,
+    .about-dissolve-ready .about-visible .about-copy > * { opacity: 1; }
+    .about-visible .about-photo { transition-delay: .1s; }
+    .about-visible .about-copy h2 { transition-delay: .25s; }
+    .about-visible .about-copy p { transition-delay: .55s; }
+    .about-visible .about-copy p + p { transition-delay: .8s; }
+}
+
+/* Fade away immediately when leaving; replay the stagger on return. */
+@media (prefers-reduced-motion: no-preference) {
+    .about-dissolve-ready .about-section:not(.about-visible) .about-photo,
+    .about-dissolve-ready .about-section:not(.about-visible) .about-copy > * {
+        transition-delay: 0s;
+        transition-duration: .8s;
+    }
+    .about-dissolve-ready .about-section:not(.about-visible)::before {
+        transition-duration: 1s;
+    }
+}
+
+/* Portfolio images sit directly on the page without gray frames. */
+body.dark-theme #art .artwork-image {
+    display: block;
+    aspect-ratio: auto;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+}
+#art .artwork-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+/* Contact actions: quiet charcoal buttons without a bright frame. */
+body.dark-theme #connect .contact-link {
+    border: 0;
+    border-radius: 8px;
+    box-shadow: none;
+    background: #242424;
+    color: #ededed;
+    padding: 14px 18px;
+}
+body.dark-theme #connect .contact-link:hover { background: #333; color: #fff; }
+body.dark-theme #connect .contact-link:focus-visible {
+    outline: 2px solid #888;
+    outline-offset: 4px;
+}
+
+</style>
 </head>
 
-<body>
-  <main>
-    <p>Music at your fingertips</p>
 
-    <h1>HarmonyWheel</h1>
+<body class="dark-theme">
 
-    <p>
-      Turn hand movements into music. Explore chords,
-      layer sounds, build drum beats, and watch your
-      performance come alive with reactive visuals.
-    </p>
+        <!-- HTML: Creates the structure -->
 
-    <!-- Replace this address with your GitHub Releases URL. -->
-    <a class="button"
-       href="https://github.com/YOUR-USERNAME/YOUR-REPOSITORY/releases/latest">
-      Download for Windows
-    </a>
+    <header class="site-header">
+<nav class="sidebar top-navigation" aria-label="Main navigation">
+        <h2>Judah Jones</h2>
+        <div class="nav-links">
 
-    <section class="features">
-      <h2>Create your own sound</h2>
+        <button onclick="showPage('home')">Home</button>
+        <button onclick="showPage('connect')">Let’s Connect</button>
+        <button onclick="showPage('projects')">Programming Projects</button>
+        <button onclick="showPage('music')">My Music</button>
+        <button onclick="showPage('art')">Art Portfolio</button>
+        </div>
+</nav>
+<section class="listening-card" aria-labelledby="listening-heading">
+            <h2 id="listening-heading">What I'm Currently listening to</h2>
+            <p id="spotify-status" role="status">Checking Spotify…</p>
 
-      <ul>
-        <li>Control notes and chords with hand tracking</li>
-        <li>Hold and layer sounds using pinch gestures</li>
-        <li>Build beats with the drum sequencer</li>
-        <li>Explore colorful music-reactive visuals</li>
-      </ul>
+            <a id="spotify-track" target="_blank"
+            rel="noopener noreferrer" hidden>
+                <img id="spotify-artwork" alt="" width="80" height="80">
+                <div>
+                    <strong id="spotify-title"></strong>
+                    <span id="spotify-artist"></span>
+                    <span class="spotify-open">Open in Spotify ↗</span>
+                </div>
+            </a>
+        </section>
+</header>
+
+    
+<main class="content">
+
+    
+
+    <section id="home" class="page">
+        <div id="prism-scene" class="prism-scene">
+            <svg viewBox="0 0 1000 560" role="img" aria-labelledby="prism-description">
+                <title id="prism-description">A dark triangle with a soft spectrum of light that follows your pointer</title>
+                <defs>
+                    <!-- Fade the whole effect to zero before any rectangular SVG boundary. -->
+                    <radialGradient id="halo-envelope-gradient" gradientUnits="userSpaceOnUse" cx="500" cy="280" r="260">
+                        <stop offset="0" stop-color="white"/>
+                        <stop offset=".64" stop-color="white"/>
+                        <stop offset=".84" stop-color="#888"/>
+                        <stop offset="1" stop-color="black"/>
+                    </radialGradient>
+                    <mask id="halo-envelope" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="560" style="mask-type: luminance">
+                        <rect width="1000" height="560" fill="url(#halo-envelope-gradient)"/>
+                    </mask>
+
+                    <linearGradient id="halo-spectrum" x1="0" y1="0" x2="1" y2=".4">
+                        <stop stop-color="#f44a85"/><stop offset=".45" stop-color="#c17bff"/>
+                        <stop offset=".75" stop-color="#63a6ff"/><stop offset="1" stop-color="#80d7bd"/>
+                    </linearGradient>
+                    <radialGradient id="halo-pointer" gradientUnits="userSpaceOnUse" cx="570" cy="220" r="300">
+                        <stop stop-color="white"/><stop offset=".3" stop-color="white" stop-opacity=".8"/>
+                        <stop offset="1" stop-color="white" stop-opacity="0"/>
+                    </radialGradient>
+                    <mask id="halo-direction" maskUnits="userSpaceOnUse" x="-1000" y="-1000" width="3000" height="2560"><rect x="-1000" y="-1000" width="3000" height="2560" fill="url(#halo-pointer)"/></mask>
+                    <filter id="halo-wide" filterUnits="userSpaceOnUse" x="-1000" y="-1000" width="3000" height="2560" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="45"/></filter>
+                    <filter id="halo-medium" filterUnits="userSpaceOnUse" x="-1000" y="-1000" width="3000" height="2560" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="17"/></filter>
+                    <filter id="halo-edge" filterUnits="userSpaceOnUse" x="-1000" y="-1000" width="3000" height="2560" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="4"/></filter>
+                </defs>
+                <g mask="url(#halo-envelope)"><g id="halo-light" mask="url(#halo-direction)">
+                    <path d="M500 130 L660 407 L340 407 Z" fill="url(#halo-spectrum)" filter="url(#halo-wide)" opacity=".55"/>
+                    <path d="M500 130 L660 407 L340 407 Z" fill="none" stroke="url(#halo-spectrum)" stroke-width="14" filter="url(#halo-medium)"/>
+                    <path d="M500 130 L660 407 L340 407 Z" fill="none" stroke="#e7ddff" stroke-width="3" filter="url(#halo-edge)" opacity=".8"/>
+                </g>
+                </g>
+                <path role="button" tabindex="0" aria-label="Use white triangle lighting" aria-pressed="false" id="halo-face" d="M500 130 L660 407 L340 407 Z" fill="#101112"/>
+            </svg>
+        </div>
+
+        
+
+        <!-- ABOUT ME: edit the paragraphs below to introduce yourself. -->
+        <section class="about-section" aria-labelledby="about-heading">
+            <div class="about-layout">
+                <img class="about-photo" src="1000023636.jpg"
+                     alt="Judah Jones" width="420" loading="lazy" decoding="async">
+                <div class="about-copy">
+                    <h2 id="about-heading">About Me</h2>
+                    <p>My name is Judah, and I’m currently a student at CU Boulder.</p>
+                    <p>I’m interested in the connections between art, music, and programming.
+                       This website brings those parts of my work together.</p>
+                    <!-- Add more <p>...</p> paragraphs here as your story grows. -->
+                </div>
+            </div>
+        </section>
+
+        
+
+    
+
+    
     </section>
-  </main>
+
+
+
+    <section id="connect" class="page" hidden>
+        <!-- CONTACT: edit the introduction, email address, and LinkedIn URL here. -->
+        <section class="contact-card" aria-labelledby="contact-heading">
+            <p class="contact-eyebrow">Seeking internship opportunities</p>
+            <h2 id="contact-heading">Let’s connect.</h2>
+            <p class="contact-description">
+                I’m interested in internships that combine technical problem-solving,
+                creativity, and hands-on learning. If you’re hiring or would like to
+                discuss an opportunity, I’d be glad to hear from you.
+            </p>
+
+            <div class="contact-actions">
+                <a class="contact-link contact-link-primary"
+                   href="mailto:Jujo7910@colorado.edu?subject=Internship%20Inquiry%20-%20Judah%20Jones">
+                    Email me about an internship
+                </a>
+                <a class="contact-link contact-link-secondary"
+                   href="https://www.linkedin.com/in/judah-jones-linked/"
+                   target="_blank" rel="noopener noreferrer">
+                    View LinkedIn profile <span aria-hidden="true">↗</span>
+                    <span class="visually-hidden"> (opens in a new tab)</span>
+                </a>
+                <a class="contact-link contact-link-secondary"
+                   href="https://app.joinhandshake.com/profiles/cktcde?hscid=ec1a02a2-0e4f-473c-a0b8-3e75efad47d2"
+                   target="_blank" rel="noopener noreferrer">
+                    View Handshake profile <span aria-hidden="true">&#8599;</span>
+                    <span class="visually-hidden"> (opens in a new tab)</span>
+                </a>
+            </div>
+
+            <p class="contact-address">Jujo7910@colorado.edu</p>
+        </section>
+        <!-- RESUME: update the PDF filename in the links and preview when replacing your resume. -->
+        <section class="statement-box resume-card" aria-labelledby="resume-heading">
+            <h2 id="resume-heading">Resume</h2>
+            <p>My qualifications, experience, and skills.</p>
+                        <div class="contact-actions">
+                <a class="contact-link" href="judah%20jones%20resume-%20%20service%20industry.pdf" target="_blank" rel="noopener noreferrer">Open resume PDF</a>
+                <a class="contact-link" href="judah%20jones%20resume-%20%20service%20industry.pdf" download>Download resume</a>
+            </div>
+<object class="resume-preview" data="judah%20jones%20resume-%20%20service%20industry.pdf" type="application/pdf"
+                    aria-label="Judah Jones resume PDF">
+                <p>Preview unavailable.
+                    <a href="judah%20jones%20resume-%20%20service%20industry.pdf" target="_blank" rel="noopener noreferrer">Open my resume PDF</a>.
+                </p>
+            </object>
+        </section>
+    </section>
+
+    <section id="projects" class="page" hidden>
+        <!-- EDIT PROJECT STATEMENT: replace the paragraph below with your own words.
+             Add another <p>...</p> inside this box for each additional paragraph. -->
+        <section class="statement-box" aria-labelledby="projects-statement-heading">
+            <h2 id="projects-statement-heading">Project Statement</h2>
+            <p>Add your project statement here.</p>
+        </section>
+
+        <p>My projects will be displayed here.</p>
+    </section>
+
+    <section id="music" class="page" hidden>
+        <div class="music-panel">
+            <h2>Listen to Judahstar</h2>
+            <!-- MUSIC ARTWORK: save these two files beside index.html.
+                 Change the filenames below if your images use different names. -->
+            <div class="music-artwork">
+                <figure><img src="judahstar-red.png"
+                    alt="Judah Star artwork in deep red with a close-up portrait and song titles"
+                    width="800" height="800" decoding="async"></figure>
+                <figure><img src="judahstar-blue.png"
+                    alt="Blue-toned artwork showing a figure beneath a mountain range"
+                    width="830" height="830" decoding="async"></figure>
+            </div>
+            <iframe class="spotify-player"
+                    title="Listen to Judahstar on Spotify"
+                    src="https://open.spotify.com/embed/track/4VHgK76l0D47pWUcFG0xIY?utm_source=generator"
+                    width="100%" height="352" frameborder="0"
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy" allowfullscreen></iframe>
+            <h3>Find my music</h3>
+            <div class="music-outlets">
+                <a href="https://open.spotify.com/track/4VHgK76l0D47pWUcFG0xIY"
+                   target="_blank" rel="noopener noreferrer">Listen on Spotify <span aria-hidden="true">&#8599;</span></a>
+                <a href="https://beacons.ai/judahstar"
+                   target="_blank" rel="noopener noreferrer">All my music links <span aria-hidden="true">&#8599;</span></a>
+                <!-- MORE OUTLETS: copy an <a>...</a> above and replace its href
+                     with your SoundCloud, Apple Music, YouTube, or Bandcamp URL. -->
+            </div>
+        </div>
+    </section>
+
+    <section id="art" class="page" hidden>
+        <!-- EDIT ARTIST STATEMENT: replace the paragraph below with your own words.
+             Add another <p>...</p> inside this box for each additional paragraph. -->
+        <section class="statement-box" aria-labelledby="art-statement-heading">
+            <h2 id="art-statement-heading">Artist Statement</h2>
+            <p>I paint what I find beautiful, exploring my inner world through color and form.</p>
+        </section>
+
+        <p class="portfolio-intro">A collection of paintings, studies, and creative experiments. Select an image to view it full size.</p>
+
+        <!-- PORTFOLIO: each figure below is one artwork. Copy a complete figure to add another piece. -->
+        <div class="art-gallery">
+            <!-- EDIT ARTWORK: metal orchids Nov 2026.jpg
+                 Change the title, medium, and date in the caption below.
+                 When changing the title, also update the image alt text.
+                 If you replace the photo, update both href and src. -->
+            <figure class="artwork">
+                <a class="artwork-image" href="Artwork/metal%20orchids%20Nov%202026.jpg" target="_blank" rel="noopener">
+                    <img src="Artwork/metal%20orchids%20Nov%202026.jpg" alt="Metal Orchids artwork" loading="lazy" decoding="async">
+                </a>
+                <figcaption>
+                    <h2 class="artwork-title">Metal Orchids</h2>
+                    <dl class="artwork-details">
+                        <dt>Medium</dt>
+                        <dd>Oil on Canvas</dd>
+                        <dt>Date</dt>
+                        <dd><time datetime="2026-11">November 2026</time></dd>
+                        
+                    </dl>
+                </figcaption>
+            </figure>
+
+             <!-- EDIT ARTWORK: metal orchids base drawing.jpg
+                 Change the title, medium, and date in the caption below.
+                 When changing the title, also update the image alt text.
+                 If you replace the photo, update both href and src. -->
+            <figure class="artwork">
+                <a class="artwork-image" href="Artwork/metal%20orchids%20base%20drawing.jpg" target="_blank" rel="noopener">
+                    <img src="Artwork/metal%20orchids%20base%20drawing.jpg" alt="Metal Orchids — Base Drawing artwork" loading="lazy" decoding="async">
+                </a>
+                <figcaption>
+                    <h2 class="artwork-title">Metal Orchids — Base Drawing</h2>
+                    <dl class="artwork-details">
+                        <dt>Medium</dt>
+                        <dd>Charcoal on canvas </Canvas></dd>
+                        <dt>Date</dt>
+                        <dd>Nov 2026</dd>
+                    </dl>
+                </figcaption>
+            </figure>
+
+            <!-- EDIT ARTWORK: Charcoal converse sept 2026.jpg
+                 Change the title, medium, and date in the caption below.
+                 When changing the title, also update the image alt text.
+                 If you replace the photo, update both href and src. -->
+            <figure class="artwork">
+                <a class="artwork-image" href="Artwork/Charcoal%20converse%20sept%202026.jpg" target="_blank" rel="noopener">
+                    <img src="Artwork/Charcoal%20converse%20sept%202026.jpg" alt="Charcoal Converse artwork" loading="lazy" decoding="async">
+                </a>
+                <figcaption>
+                    <h2 class="artwork-title">Charcoal Converse</h2>
+                    <dl class="artwork-details">
+                        <dt>Medium</dt>
+                        <dd>Charcoals</dd>
+                        <dt>Date</dt>
+                        <dd><time datetime="2026-09">September 2026</time></dd>
+                    </dl>
+                </figcaption>
+            </figure>
+
+            <!-- EDIT ARTWORK: Bouqet or Amber Dec 2025.jpg
+                 Change the title, medium, and date in the caption below.
+                 When changing the title, also update the image alt text.
+                 If you replace the photo, update both href and src. -->
+            <figure class="artwork">
+                <a class="artwork-image" href="Artwork/Bouqet%20or%20Amber%20Dec%202025.jpg" target="_blank" rel="noopener">
+                    <img src="Artwork/Bouqet%20or%20Amber%20Dec%202025.jpg" alt="Bouqet or Amber artwork" loading="lazy" decoding="async">
+                </a>
+                <figcaption>
+                    <h2 class="artwork-title">Bouqet or Amber</h2>
+                    <dl class="artwork-details">
+                        <dt>Medium</dt>
+                        <dd>Oil on Canvas</dd>
+                        <dt>Date</dt>
+                        <dd><time datetime="2025-12">December 2025</time></dd>
+                    </dl>
+                </figcaption>
+            </figure>
+
+            <!-- EDIT ARTWORK: Sunflowers Dec 2025.jpg
+                 Change the title, medium, and date in the caption below.
+                 When changing the title, also update the image alt text.
+                 If you replace the photo, update both href and src. -->
+            <figure class="artwork">
+                <a class="artwork-image" href="Artwork/Sunflowers%20Dec%202025.jpg" target="_blank" rel="noopener">
+                    <img src="Artwork/Sunflowers%20Dec%202025.jpg" alt="Sunflowers artwork" loading="lazy" decoding="async">
+                </a>
+                <figcaption>
+                    <h2 class="artwork-title">Sunflowers</h2>
+                    <dl class="artwork-details">
+                        <dt>Medium</dt>
+                        <dd>Oil on Canvas</dd>
+                        <dt>Date</dt>
+                        <dd><time datetime="2025-12">December 2025</time></dd>
+                    </dl>
+                </figcaption>
+            </figure>
+
+            <!-- EDIT ARTWORK: Yellow roses May 2025.jpg
+                 Change the title, medium, and date in the caption below.
+                 When changing the title, also update the image alt text.
+                 If you replace the photo, update both href and src. -->
+            <figure class="artwork">
+                <a class="artwork-image" href="Artwork/Yellow%20roses%20May%202025.jpg" target="_blank" rel="noopener">
+                    <img src="Artwork/Yellow%20roses%20May%202025.jpg" alt="Yellow Roses artwork" loading="lazy" decoding="async">
+                </a>
+                <figcaption>
+                    <h2 class="artwork-title">Yellow Roses</h2>
+                    <dl class="artwork-details">
+                        <dt>Medium</dt>
+                        <dd>Oil on Canvas</dd>
+                        <dt>Date</dt>
+                        <dd><time datetime="2025-05">May 2025</time></dd>
+                    </dl>
+                </figcaption>
+            </figure>
+
+            <!-- EDIT ARTWORK: White lilies May 2025.jpg
+                 Change the title, medium, and date in the caption below.
+                 When changing the title, also update the image alt text.
+                 If you replace the photo, update both href and src. -->
+            <figure class="artwork">
+                <a class="artwork-image" href="Artwork/White%20lilies%20May%202025.jpg" target="_blank" rel="noopener">
+                    <img src="Artwork/White%20lilies%20May%202025.jpg" alt="White Lilies artwork" loading="lazy" decoding="async">
+                </a>
+                <figcaption>
+                    <h2 class="artwork-title">White Lilies</h2>
+                    <dl class="artwork-details">
+                        <dt>Medium</dt>
+                        <dd>Oil on Canvas</dd>
+                        <dt>Date</dt>
+                        <dd><time datetime="2025-05">May 2025</time></dd>
+                    </dl>
+                </figcaption>
+            </figure>
+
+            <!-- EDIT ARTWORK: lavender sprigs may 2025.jpg
+                 Change the title, medium, and date in the caption below.
+                 When changing the title, also update the image alt text.
+                 If you replace the photo, update both href and src. -->
+            <figure class="artwork">
+                <a class="artwork-image" href="Artwork/lavender%20sprigs%20may%202025.jpg" target="_blank" rel="noopener">
+                    <img src="Artwork/lavender%20sprigs%20may%202025.jpg" alt="Lavender Sprigs artwork" loading="lazy" decoding="async">
+                </a>
+                <figcaption>
+                    <h2 class="artwork-title">Lavender Sprigs</h2>
+                    <dl class="artwork-details">
+                        <dt>Medium</dt>
+                        <dd>Oil on Recycled Canvas</dd>
+                        <dt>Date</dt>
+                        <dd><time datetime="2025-05">May 2025</time></dd>
+                    </dl>
+                </figcaption>
+            </figure>
+
+            <!-- EDIT ARTWORK: flower collection May 2025.jpg
+                 Change the title, medium, and date in the caption below.
+                 When changing the title, also update the image alt text.
+                 If you replace the photo, update both href and src. -->
+            <figure class="artwork">
+                <a class="artwork-image" href="Artwork/flower%20collection%20May%202025.jpg" target="_blank" rel="noopener">
+                    <img src="Artwork/flower%20collection%20May%202025.jpg" alt="Flower Collection artwork" loading="lazy" decoding="async">
+                </a>
+                <figcaption>
+                    <h2 class="artwork-title">Flower Collection</h2>
+                    <dl class="artwork-details">
+                        <dt>Medium</dt>
+                        <dd>Oil on Canvas</dd>
+                        <dt>Date</dt>
+                        <dd><time datetime="2025-05">May 2025</time></dd>
+                    </dl>
+                </figcaption>
+            </figure>
+
+            <!-- EDIT ARTWORK: flower collection 2 may 2025.jpg
+                 Change the title, medium, and date in the caption below.
+                 When changing the title, also update the image alt text.
+                 If you replace the photo, update both href and src. -->
+            <figure class="artwork">
+                <a class="artwork-image" href="Artwork/flower%20collection%202%20may%202025.jpg" target="_blank" rel="noopener">
+                    <img src="Artwork/flower%20collection%202%20may%202025.jpg" alt="Flower Collection II artwork" loading="lazy" decoding="async">
+                </a>
+                <figcaption>
+                    <h2 class="artwork-title">Flower Collection II</h2>
+                    <dl class="artwork-details">
+                        <dt>Medium</dt>
+                        <dd>Oil on Canvas</dd>
+                        <dt>Date</dt>
+                        <dd><time datetime="2025-05">May 2025</time></dd>
+                    </dl>
+                </figcaption>
+            </figure>
+
+            <!-- EDIT ARTWORK: Portrait of Basquiat on car door April 2025.jpg
+                 Change the title, medium, and date in the caption below.
+                 When changing the title, also update the image alt text.
+                 If you replace the photo, update both href and src. -->
+            <figure class="artwork">
+                <a class="artwork-image" href="Artwork/Portrait%20of%20Basquiat%20on%20car%20door%20April%202025.jpg" target="_blank" rel="noopener">
+                    <img src="Artwork/Portrait%20of%20Basquiat%20on%20car%20door%20April%202025.jpg" alt="Portrait of Basquiat on a Car Door artwork" loading="lazy" decoding="async">
+                </a>
+                <figcaption>
+                    <h2 class="artwork-title">
+                        Portrait of Basquiat on a Car Door
+                    </h2>
+
+                    <dl class="artwork-details">
+                        <dt>Medium</dt>
+                        <dd>Oil and acrylic marker on a recycled car door</dd>
+
+                        <dt>Date</dt>
+                        <dd>
+                            <time datetime="2025-04">April 2025</time>
+                        </dd>
+
+                        <dt>Collection</dt>
+                        <dd>Sold to Pikes Peak Community College</dd>
+
+                        <dt>Award</dt>
+                        <dd>
+                            “Creative Use of Media,” student show,
+                            <time datetime="2024-05-03">May 3, 2024</time>
+                        </dd>
+                    </dl>
+                </figcaption>
+            </figure>
+
+            <!-- EDIT ARTWORK: Lilies in a vase March 2025.jpg
+                 Change the title, medium, and date in the caption below.
+                 When changing the title, also update the image alt text.
+                 If you replace the photo, update both href and src. -->
+            <figure class="artwork">
+                <a class="artwork-image" href="Artwork/Lilies%20in%20a%20vase%20March%202025.jpg" target="_blank" rel="noopener">
+                    <img src="Artwork/Lilies%20in%20a%20vase%20March%202025.jpg" alt="Lilies in a Vase artwork" loading="lazy" decoding="async">
+                </a>
+                <figcaption>
+                    <h2 class="artwork-title">Lilies in a Vase</h2>
+                    <dl class="artwork-details">
+                        <dt>Medium</dt>
+                        <dd>Oil on canvas</dd>
+                        <dt>Date</dt>
+                        <dd><time datetime="2025-03">March 2025</time></dd>
+                    </dl>
+                </figcaption>
+            </figure>
+
+
+            <!-- EDIT ARTWORK: Self portrait Dec 2024.jpg
+                 Change the title, medium, and date in the caption below.
+                 When changing the title, also update the image alt text.
+                 If you replace the photo, update both href and src. -->
+            <figure class="artwork">
+                <a class="artwork-image" href="Artwork/Self%20portrait%20Dec%202024.jpg" target="_blank" rel="noopener">
+                    <img src="Artwork/Self%20portrait%20Dec%202024.jpg" alt="Self Portrait artwork" loading="lazy" decoding="async">
+                </a>
+                <figcaption>
+                    <h2 class="artwork-title">Self Portrait</h2>
+                    <dl class="artwork-details">
+                        <dt>Medium</dt>
+                        <dd>Oil on canvas</dd>
+                        <dt>Date</dt>
+                        <dd><time datetime="2024-12">December 2024</time></dd>
+                    </dl>
+                </figcaption>
+            </figure>
+
+            <!-- EDIT ARTWORK: Self portrait in gallery - Dec 2024.jpg
+                 Change the title, medium, and date in the caption below.
+                 When changing the title, also update the image alt text.
+                 If you replace the photo, update both href and src. -->
+            <figure class="artwork">
+                <a class="artwork-image" href="Artwork/Self%20portrait%20in%20gallery%20-%20Dec%202024.jpg" target="_blank" rel="noopener">
+                    <img src="Artwork/Self%20portrait%20in%20gallery%20-%20Dec%202024.jpg" alt="Self Portrait in the Gallery artwork" loading="lazy" decoding="async">
+                </a>
+                <figcaption>
+                    <h2 class="artwork-title">Self Portrait in the Gallery</h2>
+                    <dl class="artwork-details">
+                        <dt>Medium</dt>
+                        <dd>Oil on canvas</dd>
+                        <dt>Date</dt>
+                        <dd><time datetime="2024-12">December 2024</time></dd>
+                    </dl>
+                </figcaption>
+            </figure>
+
+            <!-- EDIT ARTWORK: Portrait study Nov 2024.jpg
+                 Change the title, medium, and date in the caption below.
+                 When changing the title, also update the image alt text.
+                 If you replace the photo, update both href and src. -->
+            <figure class="artwork">
+                <a class="artwork-image" href="Artwork/Portrait%20study%20Nov%202024.jpg" target="_blank" rel="noopener">
+                    <img src="Artwork/Portrait%20study%20Nov%202024.jpg" alt="Portrait Study artwork" loading="lazy" decoding="async">
+                </a>
+                <figcaption>
+                    <h2 class="artwork-title">Portrait Study</h2>
+                    <dl class="artwork-details">
+                        <dt>Medium</dt>
+                        <dd>Oil on canvas</dd>
+                        <dt>Date</dt>
+                        <dd><time datetime="2024-11">November 2024</time></dd>
+                    </dl>
+                </figcaption>
+            </figure>
+
+            <!-- EDIT ARTWORK: Figure study Nov 2024.jpg
+                 Change the title, medium, and date in the caption below.
+                 When changing the title, also update the image alt text.
+                 If you replace the photo, update both href and src. -->
+            <figure class="artwork">
+                <a class="artwork-image" href="Artwork/Figure%20study%20Nov%202024.jpg" target="_blank" rel="noopener">
+                    <img src="Artwork/Figure%20study%20Nov%202024.jpg" alt="Figure Study artwork" loading="lazy" decoding="async">
+                </a>
+                <figcaption>
+                    <h2 class="artwork-title">Figure Study</h2>
+                    <dl class="artwork-details">
+                        <dt>Medium</dt>
+                        <dd>Oil on canvas</dd>
+                        <dt>Date</dt>
+                        <dd><time datetime="2024-11">November 2024</time></dd>
+                    </dl>
+                </figcaption>
+            </figure>
+
+            <!-- EDIT ARTWORK: Fallen angel Nov 2024.jpg
+                 Change the title, medium, and date in the caption below.
+                 When changing the title, also update the image alt text.
+                 If you replace the photo, update both href and src. -->
+            <figure class="artwork">
+                <a class="artwork-image" href="Artwork/Fallen%20angel%20Nov%202024.jpg" target="_blank" rel="noopener">
+                    <img src="Artwork/Fallen%20angel%20Nov%202024.jpg" alt="Fallen Angel artwork" loading="lazy" decoding="async">
+                </a>
+                <figcaption>
+                    <h2 class="artwork-title">Fallen Angel</h2>
+                    <dl class="artwork-details">
+                        <dt>Medium</dt>
+                        <dd>Oil on Recycled canvas</dd>
+                        <dt>Date</dt>
+                        <dd><time datetime="2024-11">November 2024</time></dd>
+                    </dl>
+                </figcaption>
+            </figure>
+
+            <!-- EDIT ARTWORK: Road sign Sept 2024 - Sold.jpg
+                 Change the title, medium, and date in the caption below.
+                 When changing the title, also update the image alt text.
+                 If you replace the photo, update both href and src. -->
+            <figure class="artwork">
+                <a class="artwork-image" href="Artwork/Road%20sign%20Sept%202024%20-%20Sold.jpg" target="_blank" rel="noopener">
+                    <img src="Artwork/Road%20sign%20Sept%202024%20-%20Sold.jpg" alt="Road Sign artwork" loading="lazy" decoding="async">
+                </a>
+                <figcaption>
+                    <h2 class="artwork-title">Road Sign</h2>
+                    <dl class="artwork-details">
+                        <dt>Medium</dt>
+                        <dd>Oil on Road Sign</dd>
+                        <dt>Date</dt>
+                        <dd><time datetime="2024-09">September 2024</time></dd>
+                    </dl>
+                    <span class="artwork-status">Sold</span>
+                </figcaption>
+            </figure>
+
+            <!-- EDIT ARTWORK: Daisies May 2024.jpg
+                 Change the title, medium, and date in the caption below.
+                 When changing the title, also update the image alt text.
+                 If you replace the photo, update both href and src. -->
+            <figure class="artwork">
+                <a class="artwork-image" href="Artwork/Daisies%20May%202024.jpg" target="_blank" rel="noopener">
+                    <img src="Artwork/Daisies%20May%202024.jpg" alt="Daisies artwork" loading="lazy" decoding="async">
+                </a>
+                <figcaption>
+                    <h2 class="artwork-title">Daisies</h2>
+                    <dl class="artwork-details">
+                        <dt>Medium</dt>
+                        <dd>Oil on canvas</dd>
+                        <dt>Date</dt>
+                        <dd><time datetime="2024-05">May 2024</time></dd>
+                    </dl>
+                </figcaption>
+            </figure>
+
+            <!-- EDIT ARTWORK: Portrait of Jimi Hendrix April 2024.jpg
+                 Change the title, medium, and date in the caption below.
+                 When changing the title, also update the image alt text.
+                 If you replace the photo, update both href and src. -->
+            <figure class="artwork">
+                <a class="artwork-image" href="Artwork/Portrait%20of%20Jimi%20Hendrix%20April%202024.jpg" target="_blank" rel="noopener">
+                    <img src="Artwork/Portrait%20of%20Jimi%20Hendrix%20April%202024.jpg" alt="Portrait of Jimi Hendrix artwork" loading="lazy" decoding="async">
+                </a>
+                <figcaption>
+                    <h2 class="artwork-title">Portrait of Jimi Hendrix</h2>
+                    <dl class="artwork-details">
+                        <dt>Medium</dt>
+                        <dd>Oil on canvas</dd>
+                        <dt>Date</dt>
+                        <dd><time datetime="2024-04">April 2024</time></dd>
+                    </dl>
+                </figcaption>
+            </figure>
+
+           
+
+            
+        </div>
+    </section>
+
+</main>
+
+
+    <script>
+        // JavaScript: Controls interactions
+
+        function showPage(page) {
+            const pages = document.querySelectorAll(".page");
+            if (![...pages].some(section => section.id === page)) {
+                return;
+            }
+
+            document.body.classList.toggle("music-active", page === "music");
+            document.body.classList.add("dark-theme");
+
+            pages.forEach(section => {
+                section.hidden = section.id !== page;
+            });
+        }
+
+        async function updateSpotify() {
+            const status = document.getElementById("spotify-status");
+            const trackLink = document.getElementById("spotify-track");
+
+            try {
+                const response = await fetch(
+                    "https://spotify-backend-chi.vercel.app/api/now-playing",
+                    { signal: AbortSignal.timeout(10000) }
+                );
+
+                if (!response.ok) {
+                    throw new Error("Spotify request failed");
+                }
+
+                const song = await response.json();
+
+                if (!song.isPlaying) {
+                    status.textContent = "Not listening right now.";
+                    status.hidden = false;
+                    trackLink.hidden = true;
+                    return;
+                }
+
+                document.getElementById("spotify-title").textContent =
+                    song.title;
+
+                document.getElementById("spotify-artist").textContent =
+                    song.artist;
+
+                const artwork = document.getElementById("spotify-artwork");
+
+                artwork.hidden = !song.artwork;
+
+                if (song.artwork) {
+                    artwork.src = song.artwork;
+                } else {
+                    artwork.removeAttribute("src");
+                }
+
+                trackLink.href = song.url;
+                trackLink.hidden = false;
+                status.hidden = true;
+            } catch {
+                status.textContent = "Listening activity is unavailable.";
+                status.hidden = false;
+                trackLink.hidden = true;
+            }
+        }
+
+        // Check immediately, then every 30 seconds while the page is visible.
+        updateSpotify();
+
+        setInterval(() => {
+            if (!document.hidden) {
+                updateSpotify();
+            }
+        }, 30000);
+    </script>
+
+
+        <script>
+    // Proximity controls both brightness and how far the light extends.
+    (() => {
+        const scene = document.getElementById("prism-scene");
+        const svg = scene.querySelector("svg");
+        const light = document.getElementById("halo-pointer");
+        const glow = document.getElementById("halo-light");
+        const face = document.getElementById("halo-face");
+        const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+        let x = 570, y = 220, tx = x, ty = y;
+        let strength = .2, targetStrength = .2, frame = null;
+        function edgeDistance(px, py, ax, ay, bx, by) {
+            const dx = bx - ax, dy = by - ay;
+            const t = Math.max(0, Math.min(1, ((px-ax)*dx+(py-ay)*dy)/(dx*dx+dy*dy)));
+            return Math.hypot(px-ax-t*dx, py-ay-t*dy);
+        }
+        function proximity(px, py) {
+            const inside = py >= 130 && py <= 407 && Math.abs(px-500) <= (py-130)*160/277;
+            const d = inside ? 0 : Math.min(
+                edgeDistance(px,py,500,130,660,407),
+                edgeDistance(px,py,660,407,340,407),
+                edgeDistance(px,py,340,407,500,130));
+            return Math.pow(Math.max(0, 1-d/320), 1.5);
+        }
+        function draw() {
+            const ease = reduced.matches ? 1 : .16;
+            x += (tx-x)*ease; y += (ty-y)*ease;
+            strength += (targetStrength-strength)*ease;
+            light.setAttribute("cx", x);
+            light.setAttribute("cy", y);
+            light.setAttribute("r", 220 + strength*420);
+            glow.style.opacity = .25 + strength*.75;
+            // Keep blur on the individual light paths; no group filter rectangle.
+            // Expand the diffuse outer light without changing the triangle.
+            glow.firstElementChild.setAttribute("transform",
+                `translate(500 300) scale(${1+strength*.45}) translate(-500 -300)`);
+            frame = null;
+            if (Math.abs(tx-x)+Math.abs(ty-y)+Math.abs(targetStrength-strength)*100 > .4)
+                frame = requestAnimationFrame(draw);
+        }
+        function schedule() { if (frame === null) frame = requestAnimationFrame(draw); }
+        scene.addEventListener("pointermove", event => {
+            const matrix = svg.getScreenCTM();
+            if (!matrix) return;
+            const point = new DOMPoint(event.clientX,event.clientY).matrixTransform(matrix.inverse());
+            tx = point.x; ty = point.y;
+            targetStrength = proximity(tx,ty);
+            schedule();
+        });
+        function reset() { tx=570; ty=220; targetStrength=.2; schedule(); }
+        scene.addEventListener("pointerleave", reset);
+        scene.addEventListener("pointercancel", reset);
+        scene.addEventListener("pointerup", event => { if(event.pointerType!=="mouse") reset(); });
+        function toggleWhite() {
+            const white = scene.classList.toggle("white-light");
+            const colors = white
+                ? ["#ffffff", "#ffffff", "#ffffff", "#ffffff"]
+                : ["#f44a85", "#c17bff", "#63a6ff", "#80d7bd"];
+            document.querySelectorAll("#halo-spectrum stop").forEach((stop, index) => {
+                stop.setAttribute("stop-color", colors[index]);
+            });
+            face.setAttribute("aria-pressed", String(white));
+            face.setAttribute("aria-label", white ? "Restore colored triangle lighting" : "Use white triangle lighting");
+        }
+        face.addEventListener("click", toggleWhite);
+        face.addEventListener("keydown", event => {
+            if(event.key === "Enter" || event.key === " ") { event.preventDefault(); toggleWhite(); }
+        });
+        schedule();
+    })();
+    </script>
+
+    <script>
+(() => {
+    if (!("IntersectionObserver" in window)) return;
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+
+                // Animate each section only once.
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    document.querySelectorAll(".reveal").forEach(element => {
+        observer.observe(element);
+    });
+
+    document.documentElement.classList.add("reveal-ready");
+})();
+</script>
+
+
+<script>
+(() => {
+    const section = document.querySelector(".about-section");
+    if (!section || !("IntersectionObserver" in window)) return;
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            section.classList.toggle("about-visible", entry.isIntersecting);
+        });
+    }, { threshold: 0, rootMargin: "0px 0px -15% 0px" });
+    document.documentElement.classList.add("about-dissolve-ready");
+    observer.observe(section);
+})();
+</script>
+
 </body>
 </html>
