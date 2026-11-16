@@ -1264,6 +1264,29 @@ body.dark-theme #music .music-destination-links a:hover { color: #eee9e2; text-d
     .tree-track-region rect { stroke-width: .65; }
 }
 
+
+/* PROJECTS: an editorial feature with a responsive walkthrough. */
+#projects { max-width: 1280px; margin-inline: auto; }
+#projects .projects-intro { max-width: 820px; margin-bottom: clamp(44px,7vw,88px); }
+#projects .projects-intro h1 { margin: 0 0 20px; font-size: clamp(32px,4.8vw,64px); font-weight: normal; line-height: 1.12; letter-spacing: -.035em; color: #eee; }
+#projects .projects-intro > p:last-child { margin: 0; color: #929292; font-size: 17px; line-height: 1.7; }
+#projects .project-feature { display: grid; grid-template-columns: minmax(240px,.8fr) minmax(0,1.4fr); align-items: start; gap: clamp(28px,5vw,72px); padding-bottom: clamp(40px,6vw,80px); }
+#projects .project-index { margin: 0 0 20px; color: #858585; font: 10px/1.5 Arial,sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+#projects .project-feature h2 { margin: 0 0 20px; color: #e8e8e8; font-size: clamp(28px,3vw,40px); font-weight: normal; line-height: 1.15; letter-spacing: -.025em; }
+#projects .project-description { margin: 0; max-width: 48ch; color: #aaa; font-size: 16px; line-height: 1.85; }
+#projects .project-technologies { display: flex; flex-wrap: wrap; gap: 10px 18px; padding: 0; margin: 24px 0 30px; list-style: none; color: #818181; font: 11px/1.6 Arial,sans-serif; }
+#projects .project-links { display: flex; flex-wrap: wrap; gap: 8px 26px; }
+#projects .project-links a { display: inline-flex; align-items: center; min-height: 44px; padding: 0; border: 0; background: transparent; color: #d7d7d7; font-size: 14px; text-decoration: underline; text-decoration-color: #454545; text-underline-offset: 6px; transition: color .2s,text-decoration-color .2s; }
+#projects .project-links a:hover { color: #fff; text-decoration-color: #aaa; }
+#projects .project-links a:focus-visible { outline: 2px solid #aaa; outline-offset: 5px; }
+#projects .project-demo { min-width: 0; margin: 0; }
+#projects .project-demo iframe { display: block; width: 100%; height: auto; aspect-ratio: 16/9; border: 0; background: #101010; }
+#projects .project-demo figcaption { margin-top: 14px; color: #757575; font: 10px/1.6 Arial,sans-serif; letter-spacing: .04em; }
+@media (max-width: 950px) {
+    #projects .project-feature { grid-template-columns: 1fr; gap: 32px; }
+    #projects .project-description { max-width: 65ch; }
+}
+
 </style>
 <script type="importmap">
 {
@@ -1492,15 +1515,36 @@ body.dark-theme #music .music-destination-links a:hover { color: #eee9e2; text-d
         </section>
     </section>
 
-    <section id="projects" class="page" hidden>
-        <!-- EDIT PROJECT STATEMENT: replace the paragraph below with your own words.
-             Add another <p>...</p> inside this box for each additional paragraph. -->
-        <section class="statement-box" aria-labelledby="projects-statement-heading">
-            <h2 id="projects-statement-heading">Project Statement</h2>
-            <p>This is a list of my projects. </p>
-        </section>
-
-        <p>My projects will be displayed here.</p>
+    <section id="projects" class="page" hidden aria-labelledby="projects-heading">
+        <header class="projects-intro">
+            <p class="tree-journey-kicker">A branch in code</p>
+            <h1 id="projects-heading">Programming Projects.</h1>
+            <!-- Edit this introduction as your collection grows. -->
+            <p>Experiments in code, sound, and interaction.</p>
+        </header>
+        <article class="project-feature" aria-labelledby="harmony-wheel-heading">
+            <div class="project-feature-copy">
+                <p class="project-index">01 / Interactive music</p>
+                <h2 id="harmony-wheel-heading">Harmony Wheel</h2>
+                <!-- Edit the description and technology list here. -->
+                <p class="project-description">A virtual instrument that turns hand movements into music. Explore connected chords and melodies, sustain and layer sounds, and build a drum track underneath.</p>
+                <ul class="project-technologies" aria-label="Technologies used">
+                    <li>Python</li><li>MediaPipe</li><li>FluidSynth</li>
+                </ul>
+                <nav class="project-links" aria-label="Harmony Wheel links">
+                    <a href="https://github.com/Judah-J/Harmony-Wheel" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                    <a href="https://youtu.be/dOaQEZRPSHQ" target="_blank" rel="noopener noreferrer">Watch walkthrough</a>
+                </nav>
+            </div>
+            <figure class="project-demo">
+                <iframe src="https://www.youtube-nocookie.com/embed/dOaQEZRPSHQ"
+                    title="Harmony Wheel project walkthrough"
+                    width="800" height="450" loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <figcaption>Harmony Wheel / Project walkthrough</figcaption>
+            </figure>
+        </article>
     </section>
 
     <section id="music" class="page" hidden aria-labelledby="music-heading">
