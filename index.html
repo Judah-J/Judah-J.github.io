@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title> Website V1.0</title>
 
@@ -1021,7 +1022,7 @@ body.dark-theme #connect .contact-link:focus-visible {
 
 }
 .triangle-idle-trace {
-    animation:triangle-edge-light 12s linear infinite;
+    animation: triangle-edge-light 20s linear infinite;
 
 }
 @keyframes triangle-edge-light {
@@ -1108,7 +1109,170 @@ body.dark-theme #connect .contact-link:focus-visible {
 #halo-face { touch-action: manipulation; }
 #halo-face:focus:not(:focus-visible) { outline: none !important; stroke: none; }
 
+/* Observe each About element separately so stacked mobile content reveals on arrival. */
+@media (prefers-reduced-motion: no-preference) {
+    .about-dissolve-ready .about-section .about-photo,
+    .about-dissolve-ready .about-section .about-copy > * {
+        opacity: 0;
+        transition: opacity 1.2s ease;
+        transition-delay: 0s;
+    }
+    .about-dissolve-ready .about-section .about-photo.about-item-visible,
+    .about-dissolve-ready .about-section .about-copy > .about-item-visible {
+        opacity: 1;
+        transition-delay: .12s;
+    }
+}
+
+/* BOTANICAL IDENTITY: rooted navigation, aspirations and editorial music. */
+.tree-journey {
+    margin: 0 calc(-1 * var(--content-gutter)); padding: 0;
+    position: relative; background: #000;
+}
+.tree-journey-stage {
+    height: calc(100svh - var(--tree-header-height, 90px));
+    min-height: 420px; position: relative; overflow: hidden; isolation: isolate; background: #000;
+}
+.tree-journey-visual { position: absolute; inset: 0; opacity: var(--journey-alpha, 1); }
+#tree-mosh-canvas { display: block; width: 100%; height: 100%; touch-action: pan-y; }
+.tree-journey-intro { position: absolute; top: clamp(24px,5vh,64px); left: var(--content-gutter); right: var(--content-gutter); pointer-events: none; opacity: var(--journey-title-alpha, 1); }
+.tree-journey-kicker { margin: 0 0 16px; color: #929292; font: 10px/1.5 Arial,sans-serif; letter-spacing: .18em; text-transform: uppercase; }
+.tree-journey-intro h2 { margin: 0; color: #e4e4e4; font-size: clamp(28px,4vw,52px); font-weight: normal; letter-spacing: -.025em; }
+body.dark-theme .tree-journey-cue { position: absolute; bottom: 20px; left: var(--content-gutter); display: flex; align-items: center; gap: 14px; font: 10px/1.5 Arial,sans-serif; letter-spacing: .08em; color: #aaa; text-decoration: none; opacity: var(--journey-cue-alpha, 1); }
+.tree-journey-cue span { display: block; width: 1px; height: 28px; background: linear-gradient(#999,transparent); }
+.tree-journey-pause { position: absolute; bottom: 15px; right: var(--content-gutter); min-height: 44px; padding: 10px 0 10px 18px; border: 0; background: transparent; color: #999; cursor: pointer; font: 11px/1.5 Arial,sans-serif; }
+.tree-journey-pause:hover { color: #eee; }
+.tree-journey-pause[hidden] { display: none; }
+.tree-journey :is(a,button):focus-visible { outline: 2px solid #aaa; outline-offset: 6px; }
+.tree-journey-ready .about-section { opacity: var(--about-journey-alpha, 1); }
+.root-navigation { position: absolute; left: var(--content-gutter); right: var(--content-gutter); bottom: 15%; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; opacity: var(--root-links-alpha, 1); }
+body.dark-theme .root-navigation a { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 18px 6px 10px; min-height: 44px; color: #d0d0d0; font-size: clamp(14px,1.6vw,20px); text-align: center; text-decoration: none; }
+.root-navigation a span { font: 9px/1.5 monospace; letter-spacing: .1em; color: #828282; }
+body.dark-theme .root-navigation a:hover { color: #fff; }
+.aspirations-section { padding: clamp(90px,13vw,180px) 0; max-width: 1100px; margin: auto; }
+.aspirations-heading h2,.editorial-page-heading h1 { margin: 0; font-size: clamp(40px,6vw,80px); font-weight: normal; letter-spacing: -.035em; }
+.aspirations-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: clamp(24px,4vw,64px); margin-top: 64px; }
+.aspirations-grid h3 { margin: 0 0 20px; font-size: 24px; font-weight: normal; line-height: 1.3; }
+.aspirations-grid p { margin: 0; color: #a7a7a7; font-size: 16px; line-height: 1.9; }
+.editorial-page-heading { padding: 24px 0 clamp(48px,7vw,88px); }
+/* MUSIC / artwork-led identity: oversized type, layered covers, quiet listening space. */
+#music .music-editorial { position: relative; max-width: 1280px; margin: auto; padding: 0 0 80px; isolation: isolate; }
+.music-hero { position: relative; display: grid; grid-template-columns: minmax(0,.85fr) minmax(0,1.15fr); align-items: center; gap: clamp(24px,4vw,64px); min-height: 75svh; padding: 28px 0 72px; }
+.music-hero-copy { position: relative; z-index: 3; padding-bottom: 36px; }
+.music-hero-kicker { display: flex; align-items: center; gap: 14px; margin: 0 0 36px; color: #999; font: 10px/1.5 Arial,sans-serif; letter-spacing: .17em; text-transform: uppercase; }
+.music-hero-kicker::before { content: ''; width: 22px; height: 1px; background: #8c5e5b; }
+#music .music-editorial h1 { margin: 0; color: #eee9e2; font-size: clamp(78px,11.8vw,170px); font-weight: normal; line-height: .8; letter-spacing: -.075em; }
+.music-editorial h1 span { display: block; }
+.music-editorial h1 span:last-child { padding-left: .28em; }
+.music-hero-note { max-width: 25ch; margin: 36px 0 28px; color: #999; font-size: clamp(15px,1.5vw,18px); line-height: 1.8; }
+body.dark-theme #music .music-listen-link { display: inline-flex; align-items: center; gap: 14px; min-height: 44px; color: #e4ded7; text-decoration: none; font: 13px/1.5 Arial,sans-serif; }
+.music-listen-link svg { width: 42px; height: 42px; padding: 13px; box-sizing: border-box; border-radius: 50%; background: #211b1b; color: #c0a29b; transition: background-color .2s; }
+.music-listen-link:hover svg { background: #372626; }
+.music-cover-composition { position: relative; width: 100%; aspect-ratio: .92; min-width: 0; }
+.music-cover { position: absolute; margin: 0; }
+.music-cover img { display: block; width: 100%; height: auto; }
+.music-cover-red { z-index: 2; width: 76%; top: 0; right: 0; }
+.music-cover-blue { z-index: 1; width: 48%; left: 0; bottom: 0; }
+.music-cover figcaption { margin-top: 12px; color: #777; font: 9px/1.5 Arial,sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+.music-cover-red figcaption { text-align: right; }
+.music-cover-composition::before { content: ''; position: absolute; inset: 2% -3% 12% 14%; z-index: 0; background: radial-gradient(ellipse at 70% 25%,rgba(91,29,23,.25),transparent 65%),radial-gradient(ellipse at 10% 90%,rgba(28,59,80,.2),transparent 60%); filter: blur(24px); pointer-events: none; }
+.music-stem { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; color: #a6a39e; opacity: .15; pointer-events: none; }
+.music-listening-section { position: relative; display: grid; grid-template-columns: minmax(0,.65fr) minmax(0,1.35fr); gap: 40px; align-items: start; padding: clamp(48px,8vw,100px) 0 0; scroll-margin-top: calc(var(--tree-header-height,90px) + 28px); }
+.music-listening-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg,transparent,#272321 30%,#272321 70%,transparent); }
+.music-listening-heading h2 { margin: 0 0 20px; font-size: clamp(36px,4vw,60px); line-height: 1; font-weight: normal; letter-spacing: -.035em; }
+.music-listening-heading p { margin: 0; color: #888; font: 11px/1.8 Arial,sans-serif; letter-spacing: .06em; }
+.music-listening-body { min-width: 0; }
+.music-listening-body .spotify-player { margin: 0; width: 100%; height: 152px; }
+.music-destination-links { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 24px; }
+body.dark-theme #music .music-destination-links a { display: inline-block; padding: 10px 0; min-height: 44px; box-sizing: border-box; color: #aaa; font: 12px/1.6 Arial,sans-serif; text-decoration: none; }
+body.dark-theme #music .music-destination-links a:hover { color: #eee9e2; text-decoration: underline; text-underline-offset: 6px; }
+#music :is(.music-listen-link,.music-destination-links a):focus-visible { outline: 2px solid #b9aaa3; outline-offset: 6px; }
+@media (max-width: 700px) {
+    .music-hero { grid-template-columns: 1fr; gap: 24px; min-height: 0; padding: 20px 0 56px; }
+    .music-hero-copy { padding-bottom: 0; }
+    .music-hero-kicker { margin-bottom: 28px; }
+    #music .music-editorial h1 { font-size: clamp(64px,21.5vw,138px); line-height: .82; }
+    .music-editorial h1 span { display: inline; }
+    .music-editorial h1 span:last-child { padding: 0; }
+    .music-hero-note { margin: 24px 0 12px; max-width: 34ch; font-size: 15px; }
+    .music-cover-composition { max-width: 540px; margin: 12px auto 0; aspect-ratio: .92; }
+    .music-stem { opacity: .09; }
+    .music-listening-section { grid-template-columns: 1fr; gap: 28px; }
+}
+@media (max-width: 360px) {
+    #music .music-editorial h1 { font-size: 23vw; }
+}
+
+
+@media (max-width: 700px) {
+    .tree-journey-stage { min-height: 440px; }
+    .tree-journey-intro { top: 24px; }
+    .root-navigation { grid-template-columns: repeat(2,minmax(0,1fr)); bottom: 13%; row-gap: 36px; }
+    body.dark-theme .root-navigation a { font-size: 14px; }
+    .root-navigation a:last-child { grid-column: 1 / -1; }
+    .aspirations-grid { grid-template-columns: 1fr; gap: 44px; }
+    .aspirations-grid { margin-top: 40px; }
+    .aspirations-grid p { max-width: 48ch; }
+
+}
+@media (prefers-reduced-motion: reduce) {
+    .tree-journey-visual,.tree-journey-intro,.tree-journey-ready .about-section { opacity: 1; }
+}
+
+/* A brief decorative star, not a pinned entrance or a gate to the content. */
+.music-opening { position: relative; }
+.music-short-star {
+    display: grid;
+    place-items: center;
+    height: clamp(110px,18svh,170px);
+    margin: 0 0 12px;
+    pointer-events: none;
+}
+.music-short-star svg {
+    display: block;
+    width: clamp(78px,9vw,125px);
+    height: clamp(78px,9vw,125px);
+    color: #fff;
+    transform-origin: center;
+    will-change: transform, opacity;
+}
+#music .music-hero { min-height: 0; padding-top: 16px; }
+@media (max-width:700px) {
+    .music-short-star { height: 110px; margin-bottom: 8px; }
+    .music-short-star svg { width: 78px; height: 78px; }
+}
+@media (prefers-reduced-motion:reduce) {
+    .music-short-star svg { will-change: auto; }
+}
+
+/* Tracking sits above the faint tree, outside the feedback shader. */
+.tree-journey-visual { z-index: 0; }
+.tree-tracking-layer,.tree-tracking-layer > svg {
+    position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;
+}
+.tree-tracking-layer { z-index: 2; overflow: hidden; }
+.tree-tracking-layer > svg { z-index: 1; overflow: hidden; }
+.tree-track-region rect { stroke: rgba(238,238,238,.65); stroke-width: .75; vector-effect: non-scaling-stroke; }
+.tree-track-cross { fill: none; stroke: rgba(255,255,255,.8); stroke-width: .75; vector-effect: non-scaling-stroke; }
+.tree-track-label { fill: #c4c4c4; font: 9px monospace; letter-spacing: .09em; }
+.tree-track-connectors { fill: none; stroke: rgba(230,230,230,.18); stroke-width: .6; vector-effect: non-scaling-stroke; }
+.tree-journey-intro { z-index: 3; }
+.root-navigation { z-index: 4; }
+.tree-journey-pause,.tree-journey-cue { z-index: 5; }
+@media (max-width:700px) {
+    .tree-track-label { font-size: 8px; }
+    .tree-track-region rect { stroke-width: .65; }
+}
+
 </style>
+<script type="importmap">
+{
+    "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+    }
+}
+</script>
 </head>
 
 
@@ -1170,8 +1334,8 @@ body.dark-theme #connect .contact-link:focus-visible {
                     </mask>
 
                     <linearGradient id="halo-spectrum" x1="0" y1="0" x2="1" y2=".4">
-                        <stop stop-color="#f44a85"/><stop offset=".45" stop-color="#c17bff"/>
-                        <stop offset=".75" stop-color="#63a6ff"/><stop offset="1" stop-color="#80d7bd"/>
+                        <stop stop-color="#b66b88"/><stop offset=".45" stop-color="#a58bc7"/>
+                        <stop offset=".75" stop-color="#88a9cf"/><stop offset="1" stop-color="#98b9b4"/>
                     </linearGradient>
                     <radialGradient id="halo-pointer" gradientUnits="userSpaceOnUse" cx="570" cy="220" r="300">
                         <stop stop-color="white"/><stop offset=".3" stop-color="white" stop-opacity=".8"/>
@@ -1183,30 +1347,22 @@ body.dark-theme #connect .contact-link:focus-visible {
                     <filter id="halo-edge" filterUnits="userSpaceOnUse" x="-1000" y="-1000" width="3000" height="2560" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="4"/></filter>
                 </defs>
                 <g class="triangle-idle" pointer-events="none">
-                    <path d="M500 130 L660 407 L340 407 Z" 
-                    fill="none"
-                    stroke="#777"
-                    stroke-width="8"
-                    opacity=".5"
-                    filter="url(#halo-edge)"/>
-
-                    <path
-                    class="triangle-idle-trace"
-                    d="M500 130 L660 407 L340 407 Z"
-                    pathLength="100"
-                    fill="none"
-                    stroke="#d9caff"
-                    stroke-width="45"
-                    stroke-linecap="round"
-                    stroke-dasharray="22 74"
-                    filter="url(#halo-medium)"
-                    />
+                    <!-- A fine ambient edge keeps the silhouette legible. -->
+                    <path d="M500 130 L660 407 L340 407 Z"
+                          fill="none" stroke="#bab8c2" stroke-width="1"
+                          opacity=".26" filter="url(#halo-edge)"/>
+                    <!-- One restrained pool of light circulates around the edge. -->
+                    <path class="triangle-idle-trace"
+                          d="M500 130 L660 407 L340 407 Z" pathLength="100"
+                          fill="none" stroke="#c7bddc" stroke-width="22"
+                          stroke-linecap="round" stroke-dasharray="20 80"
+                          filter="url(#halo-medium)"/>
                 </g>
 
                 <g mask="url(#halo-envelope)"><g id="halo-light" mask="url(#halo-direction)">
-                    <path d="M500 130 L660 407 L340 407 Z" fill="url(#halo-spectrum)" filter="url(#halo-wide)" opacity=".55"/>
-                    <path d="M500 130 L660 407 L340 407 Z" fill="none" stroke="url(#halo-spectrum)" stroke-width="14" filter="url(#halo-medium)"/>
-                    <path d="M500 130 L660 407 L340 407 Z" fill="none" stroke="#e7ddff" stroke-width="3" filter="url(#halo-edge)" opacity=".8"/>
+                    <path d="M500 130 L660 407 L340 407 Z" fill="url(#halo-spectrum)" filter="url(#halo-wide)" opacity=".32"/>
+                    <path d="M500 130 L660 407 L340 407 Z" fill="none" stroke="url(#halo-spectrum)" stroke-width="10" filter="url(#halo-medium)"/>
+                    <path d="M500 130 L660 407 L340 407 Z" fill="none" stroke="#e1dceb" stroke-width="1.4" filter="url(#halo-edge)" opacity=".55"/>
                 </g>
                 </g>
                 <path role="button" tabindex="0" aria-label="Use white triangle lighting" aria-pressed="false" id="halo-face" d="M500 130 L660 407 L340 407 Z" fill="#101112"/>
@@ -1235,6 +1391,54 @@ body.dark-theme #connect .contact-link:focus-visible {
     
 
     
+            <!-- The canopy becomes a root system that leads to each area of work. -->
+        <section id="tree-mosh" class="tree-mosh tree-journey" aria-labelledby="tree-mosh-heading">
+            <div class="tree-journey-stage">
+                <div class="tree-journey-visual">
+                    <canvas id="tree-mosh-canvas" role="img" aria-label="A growing tree with white tracking boxes, whose roots lead to Projects, Art Portfolio, and Music.">
+                        Follow the links below to explore my work.
+                    </canvas>
+                </div>
+                <div class="tree-journey-intro">
+                    <p class="tree-journey-kicker">Art / Music / Code</p>
+                    <h2 id="tree-mosh-heading">Everything branches.</h2>
+                </div>
+                <nav id="root-navigation" class="root-navigation" aria-label="Explore my work">
+                    <a href="#projects" data-work-page="projects"><span>01</span>Programming Projects</a>
+                    <a href="#art" data-work-page="art"><span>02</span>Art Portfolio</a>
+                    <a href="#music" data-work-page="music"><span>03</span>Music</a>
+                </nav>
+                <a class="tree-journey-cue" href="#root-navigation">Follow the roots<span aria-hidden="true"></span></a>
+                <button type="button" class="tree-journey-pause" id="tree-mosh-pause" aria-pressed="false">Pause motion</button>
+                <p id="tree-mosh-status" class="visually-hidden" role="status"></p>
+            </div>
+        </section>
+        <!-- ASPIRATIONS: edit these paragraphs as your goals develop. -->
+        <section class="aspirations-section" aria-labelledby="aspirations-heading">
+            <div class="aspirations-heading reveal">
+                <p class="tree-journey-kicker">Where I want to grow</p>
+                <h2 id="aspirations-heading">Aspirations.</h2>
+            </div>
+            <div class="aspirations-grid">
+                <article class="reveal">
+                    <h3>Technology that helps people</h3>
+                    <p>I would like to position myself at the intersection of technology and human impact, creating solutions that make a real difference in people's lives.
+                        I want to contribute to a world that is more accessible, inclusive, and equitable. Creating net positives while using my skill set to achieve that goal.
+
+                    </p>
+                </article>
+                <article class="reveal">
+                    <h3>A better future with Advancing technology
+                    </h3>
+                    <p>In the light of advancing technology and fears that surround it, such as machine Learning, bio engineering, robotics and one day Artificial intelligence I would want to contribute to using these technologies to make postive impact.</p>
+                </article>
+                <article class="reveal">
+                    <h3>Room to keep growing</h3>
+                    <p>I’m looking for opportunities to create, keep learning, and grow as a person, while i'm currently working my way through school I would like to gain experience through internships, collaboration, or work that pushes me to grow.</p>
+                </article>
+            </div>
+        </section>
+
     </section>
 
 
@@ -1293,40 +1497,67 @@ body.dark-theme #connect .contact-link:focus-visible {
              Add another <p>...</p> inside this box for each additional paragraph. -->
         <section class="statement-box" aria-labelledby="projects-statement-heading">
             <h2 id="projects-statement-heading">Project Statement</h2>
-            <p>Add your project statement here.</p>
+            <p>This is a list of my projects. </p>
         </section>
 
         <p>My projects will be displayed here.</p>
     </section>
 
-    <section id="music" class="page" hidden>
-        <div class="music-panel">
-            <h2>Listen to Judahstar</h2>
-            <!-- MUSIC ARTWORK: save these two files beside index.html.
-                 Change the filenames below if your images use different names. -->
-            <div class="music-artwork">
-                <figure><img src="judahstar-red.png"
-                    alt="Judah Star artwork in deep red with a close-up portrait and song titles"
-                    width="800" height="800" decoding="async"></figure>
-                <figure><img src="judahstar-blue.png"
-                    alt="Blue-toned artwork showing a figure beneath a mountain range"
-                    width="830" height="830" decoding="async"></figure>
+    <section id="music" class="page" hidden aria-labelledby="music-heading">
+        <div class="music-editorial">
+            <div id="music-opening" class="music-opening">
+                <div class="music-short-star" aria-hidden="true">
+                    <svg viewBox="0 0 100 100" focusable="false">
+                        <polygon fill="currentColor" points="50,4 61,36 95,37 68,57 78,90 50,70 22,90 32,57 5,37 39,36"/>
+                    </svg>
+                </div>
+            <div class="music-hero">
+                <svg class="music-stem" viewBox="0 0 1200 800" fill="none" stroke="currentColor" stroke-width=".7" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
+                    <path d="M170 790 C290 690 275 540 460 440 C635 345 690 205 1010 45 M459 440 C470 350 420 260 320 210 M640 300 C720 330 850 310 920 245 M300 630 C400 645 475 595 520 535"/>
+                    <path d="M422 372 C340 365 306 300 302 257 C360 270 415 310 422 372 Z M708 314 C740 240 805 224 856 233 C820 289 772 318 708 314 Z M359 637 C384 581 430 562 466 575 C441 618 406 640 359 637 Z"/>
+                </svg>
+                <div class="music-hero-copy">
+                    <p class="music-hero-kicker">Judah Jones / Music</p>
+                    <h1 id="music-heading" aria-label="Judahstar"><span>Judah</span><span>star</span></h1>
+                    <p class="music-hero-note">A different branch of what I make.</p>
+                </div>
+                <div class="music-cover-composition">
+                    <!-- MUSIC ARTWORK: original proportions, with the red cover in front. -->
+                    <figure class="music-cover music-cover-red">
+                        <img src="judahstar-red.png" alt="Judah Star artwork in deep red with a close-up portrait and song titles" width="800" height="800" decoding="async">
+                        <figcaption>Judahstar / Sound</figcaption>
+                    </figure>
+                    <figure class="music-cover music-cover-blue">
+                        <img src="judahstar-blue.png" alt="Blue-toned artwork showing a figure beneath a mountain range" width="830" height="830" decoding="async">
+                    </figure>
+                </div>
             </div>
-            <iframe class="spotify-player"
+            </div>
+            <section id="music-listen" class="music-listening-section" aria-labelledby="music-featured-heading">
+                <div class="music-listening-heading">
+                    <p class="tree-journey-kicker">A branch in sound</p>
+                    <h2 id="music-featured-heading">Listen.</h2>
+                    <p>Featured track / Spotify</p>
+                </div>
+                <div class="music-listening-body">
+                    <iframe class="spotify-player"
                     title="Listen to Judahstar on Spotify"
                     src="https://open.spotify.com/embed/track/4VHgK76l0D47pWUcFG0xIY?utm_source=generator&amp;theme=0"
                     width="100%" height="152" frameborder="0"
                     allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                     loading="lazy" allowfullscreen></iframe>
-            <h3>Find my music</h3>
-            <div class="music-outlets">
+                    <div class="music-destination-links">
                 <a href="https://open.spotify.com/track/4VHgK76l0D47pWUcFG0xIY"
                    target="_blank" rel="noopener noreferrer">Listen on Spotify</a>
-                <a href="https://beacons.ai/judahstar"
-                   target="_blank" rel="noopener noreferrer">All my music links</a>
-                <!-- MORE OUTLETS: copy an <a>...</a> above and replace its href
-                     with your SoundCloud, Apple Music, YouTube, or Bandcamp URL. -->
+                <a href="https://www.youtube.com/channel/UCLWDOBq_CIsYQnAitg_jEPw"
+                   target="_blank" rel="noopener noreferrer">YouTube</a>
+                <a href="https://on.soundcloud.com/4ln5sqdrYUSPfPrXpP"
+                   target="_blank" rel="noopener noreferrer">SoundCloud</a>
+                <a href="https://music.apple.com/us/album/deism-ep/1731743166"
+                   target="_blank" rel="noopener noreferrer">Apple Music</a>
             </div>
+                </div>
+            </section>
         </div>
     </section>
 
@@ -1753,6 +1984,37 @@ body.dark-theme #connect .contact-link:focus-visible {
 
 
     <script>
+/* One cached GSAP/ScrollTrigger load shared by Home and Music. */
+window.SiteMotion = (() => {
+    let pending;
+    function script(src, id) {
+        return new Promise((resolve, reject) => {
+            const element = document.createElement('script');
+            element.id = id;
+            element.src = src;
+            element.async = true;
+            const timer = setTimeout(() => reject(new Error('Scroll library loading timed out')), 12000);
+            element.onload = () => { clearTimeout(timer); resolve(); };
+            element.onerror = () => { clearTimeout(timer); reject(new Error('Scroll library unavailable')); };
+            document.head.appendChild(element);
+        });
+    }
+    return {
+        loadScroll() {
+            if (!pending) pending = (async () => {
+                if (!window.gsap) await script('https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js', 'site-gsap-core');
+                if (!window.ScrollTrigger) await script('https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js', 'site-gsap-scrolltrigger');
+                if (!window.gsap || !window.ScrollTrigger) throw new Error('Scroll library unavailable');
+                window.gsap.registerPlugin(window.ScrollTrigger);
+                return { gsap: window.gsap, ScrollTrigger: window.ScrollTrigger };
+            })();
+            return pending;
+        }
+    };
+})();
+
+</script>
+    <script>
         // JavaScript: Controls interactions
 
         function showPage(page) {
@@ -1761,12 +2023,14 @@ body.dark-theme #connect .contact-link:focus-visible {
                 return;
             }
 
+            document.dispatchEvent(new CustomEvent("site:beforepagechange", { detail: { page } }));
             document.body.classList.toggle("music-active", page === "music");
             document.body.classList.add("dark-theme");
 
             pages.forEach(section => {
                 section.hidden = section.id !== page;
             });
+            window.scrollTo({ top: 0, behavior: "auto" });
         }
 
         async function updateSpotify() {
@@ -1859,8 +2123,8 @@ body.dark-theme #connect .contact-link:focus-visible {
             strength += (targetStrength-strength)*ease;
             light.setAttribute("cx", x);
             light.setAttribute("cy", y);
-            light.setAttribute("r", 220 + strength*420);
-            glow.style.opacity = .25 + strength*.75;
+            light.setAttribute("r", 220 + strength*330);
+            glow.style.opacity = .14 + strength*.72;
             // Fade the idle light back in as the pointer leaves the triangle.
             const nearTriangle = targetStrength >= .5;
             scene.classList.toggle("pointer-near-triangle", nearTriangle);
@@ -1868,7 +2132,7 @@ body.dark-theme #connect .contact-link:focus-visible {
             // Keep blur on the individual light paths; no group filter rectangle.
             // Expand the diffuse outer light without changing the triangle.
             glow.firstElementChild.setAttribute("transform",
-                `translate(500 300) scale(${1+strength*.45}) translate(-500 -300)`);
+                `translate(500 300) scale(${1+strength*.25}) translate(-500 -300)`);
             frame = null;
             if (Math.abs(tx-x)+Math.abs(ty-y)+Math.abs(targetStrength-strength)*100 > .4)
                 frame = requestAnimationFrame(draw);
@@ -1890,7 +2154,7 @@ body.dark-theme #connect .contact-link:focus-visible {
             const white = scene.classList.toggle("white-light");
             const colors = white
                 ? ["#ffffff", "#ffffff", "#ffffff", "#ffffff"]
-                : ["#f44a85", "#c17bff", "#63a6ff", "#80d7bd"];
+                : ["#b66b88", "#a58bc7", "#88a9cf", "#98b9b4"];
             document.querySelectorAll("#halo-spectrum stop").forEach((stop, index) => {
                 stop.setAttribute("stop-color", colors[index]);
             });
@@ -1935,13 +2199,22 @@ body.dark-theme #connect .contact-link:focus-visible {
 (() => {
     const section = document.querySelector(".about-section");
     if (!section || !("IntersectionObserver" in window)) return;
+    const targets = section.querySelectorAll(".about-photo, .about-copy > *");
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            section.classList.toggle("about-visible", entry.isIntersecting);
+            if (entry.target === section) {
+                section.classList.toggle("about-visible", entry.isIntersecting);
+            } else {
+                entry.target.classList.toggle("about-item-visible", entry.isIntersecting);
+            }
         });
-    }, { threshold: 0, rootMargin: "0px 0px -15% 0px" });
+    }, { threshold: 0, rootMargin: "-48px 0px -64px 0px" });
+    // Start after layout is painted so even initially visible items can dissolve.
     document.documentElement.classList.add("about-dissolve-ready");
-    observer.observe(section);
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+        observer.observe(section);
+        targets.forEach(target => observer.observe(target));
+    }));
 })();
 </script>
 
@@ -1978,5 +2251,375 @@ body.dark-theme #connect .contact-link:focus-visible {
 })();
 </script>
 
+<script>
+/* Cinematic tree journey: one controller, interchangeable Three.js/canvas renderers. */
+(() => {
+    const section = document.getElementById('tree-mosh');
+    if (!section) return;
+    const stage = section.querySelector('.tree-journey-stage');
+    const visual = section.querySelector('.tree-journey-visual');
+    const home = document.getElementById('home');
+    const about = document.querySelector('.about-section');
+    const header = document.querySelector('.site-header');
+    const pause = document.getElementById('tree-mosh-pause');
+    const cue = section.querySelector('.tree-journey-cue');
+    const status = document.getElementById('tree-mosh-status');
+    const rootNav = document.getElementById('root-navigation');
+    const rootLinks = [...rootNav.querySelectorAll('[data-work-page]')];
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    const mobile = matchMedia('(max-width: 700px)');
+    const clamp = n => Math.max(0, Math.min(1, n));
+    const smooth = n => { const t = clamp(n); return t*t*(3-2*t); };
+    const mix = (a,b,t) => a+(b-a)*t;
+    const state = { progress: 0, time: 0, paused: false, visible: false, active: !home.hidden, reduced: reduced.matches };
+    let adapter, frame = null, last = 0, drawQueued = null, refreshQueued = null;
+    let canopyRecords=[],rootRecords=[],tracker;
+    let gsap, ScrollTrigger, timeline, trigger, booted = false, gsapReady = false, headerHeight = 0;
+    function journeyPose(p) {
+        if (state.reduced || !trigger) return {zoom:1,yaw:0,cameraY:-1.25,cameraZ:10,targetY:-1.25,amount:.08};
+        const descend=smooth((p-.2)/.45),spread=smooth((p-.65)/.2),settle=smooth((p-.85)/.15);
+        return {zoom:1,yaw:mix(-.12,0,descend),cameraY:mix(.55,-2.85,descend),
+            cameraZ:mix(6.5,5.5,descend),targetY:mix(.3,-3,descend),
+            amount:mix(.08,.2,descend)+spread*.04-settle*.12};
+    }
+    function setCanvas(canvas, engine) {
+        canvas.id = 'tree-mosh-canvas'; canvas.dataset.engine = engine;
+        canvas.setAttribute('role','img');
+        canvas.setAttribute('aria-label','A growing tree with white tracking boxes, whose roots lead to Projects, Art Portfolio, and Music.');
+        visual.replaceChildren(canvas);
+    }
+    function seeded(seed) { let n=seed>>>0; return () => { n+=0x6D2B79F5;let t=Math.imul(n^n>>>15,1|n);t^=t+Math.imul(t^t>>>7,61|t);return ((t^t>>>14)>>>0)/4294967296; }; }
+    function branches() {
+        const random=seeded(2401),result=[],depth=mobile.matches?6:7;
+        function grow(start,direction,length,radius,level,cluster) {
+            let from=start;const bend=[(random()-.5)*.3,(random()-.5)*.1,(random()-.5)*.3];
+            for(let i=1;i<=5;i++){
+                const t=i/5,end=start.map((v,k)=>v+direction[k]*length*t+bend[k]*length*t*t);
+                result.push({a:from,b:end,radius,cluster,birth:(depth-level+t)/(depth+1),root:false});from=end;
+            }
+            if(!level)return;
+            for(let i=0;i<(level===depth?3:2);i++){
+                const angle=random()*Math.PI*2,spread=.4+random()*.55;
+                const d=[direction[0]*.6+Math.cos(angle)*spread,direction[1]*.65+.3+random()*.18,direction[2]*.6+Math.sin(angle)*spread],norm=Math.hypot(...d);
+                grow(from,d.map(v=>v/norm),length*(.65+random()*.13),radius*.65,level-1,level===depth?`B0${i+1}`:cluster);
+            }
+        }
+        grow([0,-1.15,0],[0,1,0],.86,.042,depth,'T00');
+        return result.sort((a,b)=>a.birth-b.birth);
+    }
+    function treeGrowth(){
+        if(state.reduced||!trigger)return {canopy:1,roots:1};
+        return {canopy:smooth((state.progress+.012)/.212),roots:smooth((state.progress-.28)/.52)};
+    }
+    function visibleCount(records,growth){let lo=0,hi=records.length;while(lo<hi){const mid=(lo+hi)>>>1;if(records[mid].birth<=growth)lo=mid+1;else hi=mid;}return lo;}
+    function projectTreePoint(v,pose,time,isRoot,width,height){
+        const angle=isRoot?0:pose.yaw+Math.sin(time*.09)*.025,c=Math.cos(angle),s=Math.sin(angle);
+        // Match Three.js's right-handed rotation around the Y axis exactly.
+        const x=v[0]*c+v[2]*s,z=-v[0]*s+v[2]*c,basis=cameraBasis(pose),dy=v[1]-pose.cameraY,dz=z-basis.z;
+        const depth=dy*basis.fy+dz*basis.fz;
+        if(depth<=.15)return null;
+        const up=dy*basis.uy+dz*basis.uz,focal=height/(2*Math.tan(19*Math.PI/180));
+        return {x:width*.5+x*focal/depth,y:height*.5-up*focal/depth,depth};
+    }
+    // Shared camera math aligns root endpoints in both rendering backends.
+    function cameraBasis(pose) {
+        const z=pose.cameraZ*(mobile.matches?1.25:1),dy=pose.targetY-pose.cameraY,n=Math.hypot(dy,z);
+        return {z,fy:dy/n,fz:-z/n,uy:z/n,uz:dy/n};
+    }
+    function rootTargets() {
+        const rect=stage.getBoundingClientRect(),pose=journeyPose(1),basis=cameraBasis(pose);
+        const focal=rect.height/(2*Math.tan(19*Math.PI/180));
+        return rootLinks.map(link=>{
+            const box=link.getBoundingClientRect();
+            const sx=(box.left+box.width/2-rect.left-rect.width/2)/focal;
+            const sy=-(box.top+4-rect.top-rect.height/2)/focal;
+            const rayY=basis.fy+sy*basis.uy,rayZ=basis.fz+sy*basis.uz;
+            const t=-basis.z/rayZ;
+            return [sx*t,pose.cameraY+rayY*t,0];
+        });
+    }
+    function rootBranches() {
+        const result=[],random=seeded(8417),start=[0,-1.15,0];
+        rootTargets().forEach((end,index)=>{
+            const c1=[end[0]*.12,-1.85,(index%2?1:-1)*.4];
+            const c2=[end[0]*.78,end[1]+.7,(index%2?1:-1)*.22];
+            let from=start;
+            for(let step=1;step<=22;step++){
+                const t=step/22,v=1-t;
+                const to=start.map((n,k)=>v*v*v*n+3*v*v*t*c1[k]+3*v*t*t*c2[k]+t*t*t*end[k]);
+                result.push({a:from,b:to,radius:mix(.036,.0025,t),root:true,cluster:`R0${index+1}`,birth:t});
+                if(step>3&&step<18&&step%3===0){
+                    const twig=[to[0]+(random()-.5)*.65,to[1]-.18-random()*.25,to[2]+(random()-.5)*.45];
+                    result.push({a:to,b:twig,radius:.004,root:true,cluster:`R0${index+1}`,birth:Math.min(1,t+.01)});
+                }
+                from=to;
+            }
+        });
+        return result.sort((a,b)=>a.birth-b.birth);
+    }
+    function canvasAdapter() {
+        const canvas=document.createElement('canvas'),ctx=canvas.getContext('2d',{alpha:false});
+        if(!ctx)throw Error('Canvas unavailable');
+        const buffer=document.createElement('canvas'),back=buffer.getContext('2d',{alpha:false});
+        let w=0,h=0,detail;
+        function clear(){ctx.fillStyle='#000';ctx.fillRect(0,0,w,h);if(back){back.fillStyle='#000';back.fillRect(0,0,w,h);}}
+        return {engine:'canvas',mount(){setCanvas(canvas,'canvas-fallback');},
+            resize(){const r=stage.getBoundingClientRect();if(!r.width||!r.height)return;const ratio=Math.min(devicePixelRatio||1,mobile.matches?1:1.5);
+                w=canvas.width=buffer.width=Math.round(r.width*ratio);h=canvas.height=buffer.height=Math.round(r.height*ratio);
+                if(detail!==mobile.matches||!canopyRecords.length){canopyRecords=branches();detail=mobile.matches;}
+                rootRecords=rootBranches();tracker.setGeometry(canopyRecords,rootRecords);tracker.resize();clear();},
+            clear,
+            draw(pose,time,feedback){
+                if(!w||!h)return;
+                if(feedback&&back){back.drawImage(canvas,0,0);ctx.fillStyle='rgba(0,0,0,.42)';ctx.fillRect(0,0,w,h);}else clear();
+                const growth=treeGrowth();ctx.lineCap='round';
+                for(const records of [canopyRecords,rootRecords])for(const segment of records){
+                    if(segment.birth>(segment.root?growth.roots:growth.canopy))break;
+                    const a=projectTreePoint(segment.a,pose,time,segment.root,w,h),b=projectTreePoint(segment.b,pose,time,segment.root,w,h);
+                    if(!a||!b)continue;
+                    ctx.strokeStyle='rgba(170,170,170,.28)';ctx.lineWidth=Math.max(.4,segment.radius*70);
+                    ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
+                }
+                if(feedback&&back){ctx.globalAlpha=pose.amount*.15;for(let i=0;i<5;i++){const y=(Math.sin(i*14.3+time*.5)+1)*.5*(h-6);ctx.drawImage(buffer,0,y,w,2,Math.sin(i*3+time)*w*.008*pose.amount,y,w,2);}ctx.globalAlpha=1;}
+            },dispose(){clear();}};
+    }
+    async function threeAdapter() {
+        const [T,{EffectComposer},{RenderPass},{AfterimagePass},{OutputPass}]=await timeout(Promise.all([
+            import('three'),import('three/addons/postprocessing/EffectComposer.js'),import('three/addons/postprocessing/RenderPass.js'),
+            import('three/addons/postprocessing/AfterimagePass.js'),import('three/addons/postprocessing/OutputPass.js')]),12000);
+        const canvas=document.createElement('canvas');let renderer,composer,history,geometry,material,mesh,rootMesh;
+        try {
+            renderer=new T.WebGLRenderer({canvas,antialias:false,alpha:false,powerPreference:'low-power'});
+            renderer.setClearColor(0x000000,1);renderer.setPixelRatio(Math.min(devicePixelRatio||1,mobile.matches?1:1.5));
+            const scene=new T.Scene();scene.fog=new T.FogExp2(0x000000,.055);
+            const camera=new T.PerspectiveCamera(38,1,.1,40),group=new T.Group();scene.add(group);
+            scene.add(new T.HemisphereLight(0xffffff,0x333333,1.3));
+            const key=new T.DirectionalLight(0xffffff,1.5);key.position.set(-3,5,4);scene.add(key);
+            const rim=new T.DirectionalLight(0xffffff,1.2);rim.position.set(3,2,-4);scene.add(rim);
+            composer=new EffectComposer(renderer);composer.addPass(new RenderPass(scene,camera));
+            history=new AfterimagePass(.94);history.uniforms.uTime={value:0};history.uniforms.uAmount={value:.25};
+            history.compFsMaterial.fragmentShader=`uniform sampler2D tOld;uniform sampler2D tNew;uniform float damp;uniform float uTime;uniform float uAmount;varying vec2 vUv;
+                float hash(float n){return fract(sin(n*91.345)*47453.5453);}
+                void main(){float row=floor(vUv.y*95.0);float slice=hash(row+floor(uTime*3.0));
+                vec2 drift=vec2(sin(row*.31+uTime*.5)*.0015,-.0018)*uAmount;drift.x+=step(.87,slice)*(slice-.5)*.025*uAmount;
+                vec2 oldUV=clamp((vUv-.5)*(1.0-.001*uAmount)+.5+drift,0.0,1.0);
+                vec3 oldFrame=texture2D(tOld,oldUV).rgb;vec3 liveFrame=texture2D(tNew,vUv).rgb;
+                oldFrame*=damp*smoothstep(.008,.05,oldFrame);float mono=dot(max(liveFrame,oldFrame),vec3(.2126,.7152,.0722));gl_FragColor=vec4(vec3(mono),1.0);}`;
+            history.compFsMaterial.needsUpdate=true;composer.addPass(history);composer.addPass(new OutputPass());
+            geometry=new T.CylinderGeometry(.7,1,1,5,1);material=new T.MeshStandardMaterial({color:0x686868,roughness:1,metalness:0});
+            let detail;
+            function instanced(records){
+                const instance=new T.InstancedMesh(geometry,material,records.length);
+                const dummy=new T.Object3D(),a=new T.Vector3(),b=new T.Vector3(),d=new T.Vector3(),up=new T.Vector3(0,1,0);
+                records.forEach((segment,i)=>{a.fromArray(segment.a);b.fromArray(segment.b);d.subVectors(b,a);const len=d.length();dummy.position.copy(a).add(b).multiplyScalar(.5);dummy.quaternion.setFromUnitVectors(up,d.normalize());dummy.scale.set(Math.max(.0012,segment.radius),len*1.05,Math.max(.0012,segment.radius));dummy.updateMatrix();instance.setMatrixAt(i,dummy.matrix);});
+                instance.instanceMatrix.needsUpdate=true;instance.computeBoundingSphere();return instance;
+            }
+            function rebuildMeshes(){
+                if(detail!==mobile.matches||!mesh){
+                    if(mesh){group.remove(mesh);mesh.dispose();}
+                    canopyRecords=branches();mesh=instanced(canopyRecords);group.add(mesh);detail=mobile.matches;
+                }
+                if(rootMesh){scene.remove(rootMesh);rootMesh.dispose();}
+                rootRecords=rootBranches();rootMesh=instanced(rootRecords);scene.add(rootMesh);
+                tracker.setGeometry(canopyRecords,rootRecords);tracker.resize();
+            }
+            let clearNext=true;
+            const result={engine:'threejs',mount(){setCanvas(canvas,'threejs');},
+                resize(){const r=stage.getBoundingClientRect();if(!r.width||!r.height)return;renderer.setSize(r.width,r.height,false);composer.setSize(r.width,r.height);camera.aspect=r.width/r.height;camera.updateProjectionMatrix();rebuildMeshes();clearNext=true;},
+                clear(){clearNext=true;},
+                draw(pose,time,feedback){camera.position.set(0,pose.cameraY,pose.cameraZ*(mobile.matches?1.25:1));camera.lookAt(0,pose.targetY,0);
+                    group.rotation.y=pose.yaw+Math.sin(time*.09)*.025;group.rotation.z=0;
+                    const growth=treeGrowth();mesh.count=visibleCount(canopyRecords,growth.canopy);rootMesh.count=visibleCount(rootRecords,growth.roots);
+                    history.uniforms.uTime.value=time;history.uniforms.uAmount.value=feedback?pose.amount:0;
+                    history.uniforms.damp.value=(feedback && !clearNext) ? .65+pose.amount*.23 : 0;composer.render();clearNext=false;},
+                dispose(){geometry.dispose();material.dispose();mesh.dispose();rootMesh?.dispose();composer.passes.forEach(pass=>pass.dispose?.());composer.dispose();renderer.dispose();}};
+            canvas.addEventListener('webglcontextlost',event=>{event.preventDefault();switchToCanvas();});
+            // Shader errors during the first frame can also use the canvas fallback.
+            renderer.debug.onShaderError=()=>{throw Error('Tree shader compilation failed');};
+            result.resize();result.draw(journeyPose(0),0,false);return result;
+        } catch(error) {geometry?.dispose();material?.dispose();rootMesh?.dispose();composer?.passes.forEach(pass=>pass.dispose?.());composer?.dispose();renderer?.dispose();throw error;}
+    }
+    // Crisp 2D tracking bounds are projected from the same visible geometry as the tree.
+    function createTreeTracker() {
+        const ns='http://www.w3.org/2000/svg';
+        const layer=document.createElement('div');layer.className='tree-tracking-layer';
+        layer.setAttribute('aria-hidden','true');layer.style.opacity='0';
+        const svg=document.createElementNS(ns,'svg');svg.setAttribute('focusable','false');svg.setAttribute('aria-hidden','true');layer.appendChild(svg);
+        const connectors=document.createElementNS(ns,'path');connectors.classList.add('tree-track-connectors');svg.appendChild(connectors);
+        stage.insertBefore(layer,stage.querySelector('.tree-journey-intro'));
+        const nodes=new Map();let groups=new Map(),width=0,height=0;
+        function element(name,attrs){const el=document.createElementNS(ns,name);for(const [key,value]of Object.entries(attrs||{}))el.setAttribute(key,String(value));return el;}
+        function ensure(id){
+            if(nodes.has(id))return nodes.get(id);
+            const group=element('g',{'class':'tree-track-region','data-track-id':id,opacity:0});
+            const rect=element('rect',{fill:'none'}),cross=element('path',{'class':'tree-track-cross'}),label=element('text',{'class':'tree-track-label'});
+            label.textContent=id;group.appendChild(rect);group.appendChild(cross);group.appendChild(label);svg.appendChild(group);
+            const value={group,rect,cross,label,box:null,alpha:0,selected:false};nodes.set(id,value);return value;
+        }
+        function setGeometry(canopy,roots){
+            groups=new Map();for(const segment of [...canopy,...roots]){if(!groups.has(segment.cluster))groups.set(segment.cluster,[]);groups.get(segment.cluster).push(segment);}
+            for(const node of nodes.values()){node.box=null;node.selected=false;node.group.setAttribute('opacity','0');}
+        }
+        function resize(){const rect=stage.getBoundingClientRect();width=rect.width;height=rect.height;svg.setAttribute('viewBox',`0 0 ${width} ${height}`);for(const node of nodes.values())node.box=null;}
+        function reset(){for(const node of nodes.values()){node.box=null;node.alpha=0;node.selected=false;node.group.setAttribute('opacity','0');}}
+        function safeArea(){
+            const rect=stage.getBoundingClientRect(),intro=stage.querySelector('.tree-journey-intro').getBoundingClientRect();
+            const protectTitle=!state.reduced&&!!trigger&&state.progress<.2;
+            let top=protectTitle?Math.max(28,intro.bottom-rect.top+18):28;
+            let bottom=height-64;
+            if(state.reduced||!trigger||state.progress>.75)bottom=Math.min(bottom,rootNav.getBoundingClientRect().top-rect.top-18);
+            return {left:18,right:width-18,top:Math.min(top,height*.4),bottom};
+        }
+        function overlap(a,b){const area=Math.max(0,Math.min(a.x+a.w,b.x+b.w)-Math.max(a.x,b.x))*Math.max(0,Math.min(a.y+a.h,b.y+b.h)-Math.max(a.y,b.y));return area/Math.max(1,Math.min(a.w*a.h,b.w*b.h));}
+        function update(pose,time,snap=false){
+            if(!state.active||!state.visible||document.hidden||!width||!height)return;
+            const safe=safeArea();if(safe.bottom<safe.top+35){reset();return;}
+            const growth=treeGrowth(),candidates=[];
+            for(const [id,segments]of groups){
+                let left=Infinity,top=Infinity,right=-Infinity,bottom=-Infinity,count=0;
+                for(const segment of segments){
+                    if(segment.birth>(segment.root?growth.roots:growth.canopy))continue;
+                    for(const point of [segment.a,segment.b]){
+                        const projected=projectTreePoint(point,pose,time,segment.root,width,height);
+                        if(!projected||projected.x< -40||projected.x>width+40||projected.y< -40||projected.y>height+40)continue;
+                        left=Math.min(left,projected.x);right=Math.max(right,projected.x);top=Math.min(top,projected.y);bottom=Math.max(bottom,projected.y);count++;
+                    }
+                }
+                if(count<4||right<safe.left||left>safe.right||bottom<safe.top||top>safe.bottom)continue;
+                const x=Math.max(safe.left,left-9),y=Math.max(safe.top,top-9),r=Math.min(safe.right,right+9),b=Math.min(safe.bottom,bottom+9);
+                const box={x,y,w:r-x,h:b-y};
+                if(box.w<24||box.h<24||box.w>width*.88||box.h>height*.9)continue;
+                const previous=nodes.get(id);
+                candidates.push({id,box,score:(previous?.selected?1000000:0)+Math.min(box.w*box.h,200000)});
+            }
+            candidates.sort((a,b)=>b.score-a.score||a.id.localeCompare(b.id));
+            const chosen=[];for(const candidate of candidates){if(chosen.length>=(mobile.matches?3:6))break;
+                if(chosen.some(old=>overlap(candidate.box,old.box)>.68||(Math.abs(candidate.box.x-old.box.x)<42&&Math.abs(candidate.box.y-old.box.y)<16)))continue;
+                chosen.push(candidate);}
+            const selected=new Set(chosen.map(box=>box.id));
+            for(const [id,node]of nodes){if(!selected.has(id)){node.selected=false;node.alpha=0;node.group.setAttribute('opacity','0');}}
+            const alpha=(!trigger||state.reduced) ? .65 : smooth((state.progress+.008)/.05)*(1-smooth((state.progress-.84)/.12));
+            layer.style.opacity=String(alpha*Number(section.style.getPropertyValue('--journey-alpha')||1));
+            for(const candidate of chosen){
+                const node=ensure(candidate.id),target=candidate.box;
+                if(!node.box||snap)node.box={...target};else for(const key of ['x','y','w','h'])node.box[key]+=(target[key]-node.box[key])*.2;
+                node.selected=true;node.alpha=snap?1:node.alpha+(1-node.alpha)*.2;
+                const box=node.box;
+                box.x=Math.max(safe.left,Math.min(box.x,safe.right-24));box.y=Math.max(safe.top,Math.min(box.y,safe.bottom-24));
+                box.w=Math.min(box.w,safe.right-box.x);box.h=Math.min(box.h,safe.bottom-box.y);
+                node.group.setAttribute('opacity',String(node.alpha));
+                for(const [key,value]of Object.entries({x:box.x,y:box.y,width:box.w,height:box.h}))node.rect.setAttribute(key,String(value));
+                node.cross.setAttribute('d',`M${box.x-4} ${box.y}h8 M${box.x} ${box.y-4}v8`);
+                node.label.setAttribute('x',String(box.x+6));node.label.setAttribute('y',String(Math.max(14,box.y-7)));
+            }
+            let connection='';for(let i=1;i<chosen.length&&i<4;i++){
+                const a=nodes.get(chosen[i-1].id).box,b=nodes.get(chosen[i].id).box;
+                const ax=a.x+a.w/2,ay=a.y+a.h/2,bx=b.x+b.w/2,by=b.y+b.h/2;
+                if(Math.hypot(ax-bx,ay-by)<Math.min(width,height)*.55)connection+=`M${ax} ${ay}L${bx} ${by} `;
+            }connectors.setAttribute('d',connection);
+        }
+        return {setGeometry,resize,reset,update,dispose(){reset();layer.remove();}};
+    }
+
+    function timeout(promise,ms){let timer;return Promise.race([promise,new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('Library loading timed out')),ms);})]).finally(()=>clearTimeout(timer));}
+    function stop(){if(frame!==null)cancelAnimationFrame(frame);frame=null;last=0;}
+    function draw(feedback=false){
+        if(!adapter||!state.active||!state.visible||document.hidden)return;
+        const pose=journeyPose(state.progress),history=feedback&&!state.paused&&!state.reduced;
+        adapter.draw(pose,state.time,history);tracker.update(pose,state.time,!history);
+    }
+    function queueDraw(){if(drawQueued===null)drawQueued=requestAnimationFrame(()=>{drawQueued=null;draw(false);});}
+    function running(){return adapter&&state.active&&state.visible&&!state.paused&&!state.reduced&&!document.hidden;}
+    function run(){if(frame!==null||!running())return;const tick=now=>{if(!running()){stop();return;}frame=requestAnimationFrame(tick);if(now-last<1000/30)return;const delta=last?Math.min((now-last)/1000,.08):.033;last=now;state.time+=delta;draw(true);};frame=requestAnimationFrame(tick);}
+    async function switchToCanvas(){stop();adapter?.dispose();try{adapter=canvasAdapter();adapter.mount();adapter.resize();draw(false);run();status.textContent='Tree display ready.';}catch{adapter=null;status.textContent='Continue below to explore my work.';}}
+    function updateAppearance(){
+        if(!state.active)return;
+        const cinematic=!!trigger&&!state.reduced;
+        const entry=cinematic?smooth((innerHeight-stage.getBoundingClientRect().top)/(innerHeight*.55)):1;
+        const p=state.progress;
+        const alpha=cinematic?entry*mix(.35,1,smooth(p/.2)):1;
+        const rootsReady=!cinematic||p>=.86;
+        section.style.setProperty('--journey-alpha',alpha);
+        section.style.setProperty('--journey-title-alpha',cinematic?1-smooth(p/.23):1);
+        section.style.setProperty('--journey-cue-alpha',cinematic?1-smooth(p/.15):1);
+        section.style.setProperty('--root-links-alpha',cinematic?smooth((p-.85)/.12):1);
+        rootNav.inert=!rootsReady;
+        rootNav.setAttribute('aria-hidden',String(!rootsReady));
+        rootLinks.forEach(link=>link.tabIndex=rootsReady?0:-1);
+        cue.style.pointerEvents=cinematic&&p>.15?'none':'';
+        cue.tabIndex=cinematic&&p>.15?-1:0;
+        about?.style.setProperty('--about-journey-alpha',cinematic?1-entry:1);
+    }
+    function setProgress(p){p=clamp(p);if(state.progress-p>.08){adapter?.clear();tracker.reset();}state.progress=p;updateAppearance();if(!running())queueDraw();}
+    function pauseLabel(){pause.hidden=state.reduced;pause.textContent=state.paused?'Resume motion':'Pause motion';pause.setAttribute('aria-pressed',String(state.paused));}
+    tracker=createTreeTracker();
+    pause.addEventListener('click',()=>{state.paused=!state.paused;pauseLabel();if(state.paused){stop();adapter?.clear();draw(false);}else run();});
+    async function bootRenderer(){if(booted)return;booted=true;status.textContent='Loading tree display.';try{adapter=await threeAdapter();adapter.mount();adapter.resize();draw(false);status.textContent='Tree display ready.';run();}catch{await switchToCanvas();}}
+    function removeTrigger(){if(timeline){timeline.scrollTrigger?.kill(true);timeline.kill();}timeline=null;trigger=null;}
+    function setupScroll(){
+        removeTrigger();state.progress=0;
+        if(!gsapReady||state.reduced||!state.active){updateAppearance();queueDraw();return;}
+        const playhead={p:0};
+        timeline=gsap.timeline({scrollTrigger:{trigger:section,pin:stage,start:()=>`top top+=${headerHeight}`,end:()=>`+=${innerHeight*(mobile.matches?2:3)}`,
+            scrub:.6,pinSpacing:true,anticipatePin:1,invalidateOnRefresh:true,onUpdate:updateAppearance,onRefresh:updateAppearance}});
+        timeline.to(playhead,{p:1,duration:1,ease:'none',onUpdate:()=>setProgress(playhead.p)});
+        trigger=timeline.scrollTrigger;adapter?.resize();adapter?.clear();queueDraw();ScrollTrigger.refresh();updateAppearance();
+    }
+    function refresh(){if(refreshQueued!==null)return;refreshQueued=requestAnimationFrame(()=>{refreshQueued=null;const next=Math.round(header.getBoundingClientRect().height);headerHeight=next;document.documentElement.style.setProperty('--tree-header-height',`${next}px`);adapter?.resize();adapter?.clear();queueDraw();if(trigger&&state.active)ScrollTrigger.refresh();updateAppearance();});}
+    async function bootScroll(){try{const libraries=await window.SiteMotion.loadScroll();gsap=libraries.gsap;ScrollTrigger=libraries.ScrollTrigger;gsapReady=true;setupScroll();}catch{gsapReady=false;removeTrigger();state.progress=0;updateAppearance();queueDraw();}}
+    function deactivate(){state.active=false;stop();tracker.reset();removeTrigger();}
+    function activate(){state.active=true;requestAnimationFrame(()=>{refresh();setupScroll();run();});}
+    document.addEventListener('site:beforepagechange',event=>{if(event.detail.page!=='home')deactivate();});
+    new MutationObserver(()=>{if(home.hidden)deactivate();else if(!state.active)activate();}).observe(home,{attributes:true,attributeFilter:['hidden']});
+    document.querySelectorAll('[data-work-page]').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();deactivate();showPage(link.dataset.workPage);scrollTo({top:0,behavior:'auto'});}));
+    cue.addEventListener('click',event=>{event.preventDefault();if(trigger&&!state.reduced)scrollTo({top:trigger.end-1,behavior:'smooth'});else rootNav.scrollIntoView({behavior:state.reduced?'auto':'smooth',block:'center'});});
+    if('IntersectionObserver'in window){
+        const loader=new IntersectionObserver(entries=>{if(entries.some(entry=>entry.isIntersecting)){bootRenderer();loader.disconnect();}},{rootMargin:'200px'});loader.observe(stage);
+        new IntersectionObserver(entries=>{state.visible=entries[0].isIntersecting;if(state.visible){bootRenderer();queueDraw();run();}else stop();},{threshold:0}).observe(stage);
+    }else{state.visible=true;bootRenderer();}
+    if('ResizeObserver'in window){let measuredHeader=0,measuredStage='';new ResizeObserver(()=>{const h=Math.round(header.getBoundingClientRect().height);if(h!==measuredHeader){measuredHeader=h;refresh();}}).observe(header);new ResizeObserver(()=>{const r=stage.getBoundingClientRect(),size=`${r.width}:${r.height}`;if(size!==measuredStage){measuredStage=size;adapter?.resize();adapter?.clear();queueDraw();}}).observe(stage);}
+    window.addEventListener('resize',refresh,{passive:true});
+    window.addEventListener('scroll',()=>{if(state.active)updateAppearance();},{passive:true});
+    document.addEventListener('visibilitychange',()=>document.hidden?stop():run());
+    reduced.addEventListener('change',()=>{state.reduced=reduced.matches;pauseLabel();adapter?.clear();setupScroll();if(state.reduced)stop();else run();});
+    mobile.addEventListener('change',()=>{refresh();setupScroll();});
+    document.documentElement.classList.remove('tree-scroll-ready');
+    document.documentElement.classList.add('tree-journey-ready');
+    about?.style.removeProperty('--about-exit');
+    pauseLabel();refresh();bootScroll();
+    window.addEventListener('pagehide',()=>{stop();removeTrigger();adapter?.dispose();tracker.dispose();},{once:true});
+})();
+
+
+
+</script>
+<script>
+/* Expand and fade the normal star over a short, unpinned scroll. */
+(() => {
+    const page=document.getElementById('music');
+    const star=page?.querySelector('.music-short-star svg');
+    if(!page||!star)return;
+    const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+    const mobile=matchMedia('(max-width: 700px)');
+    let frame=null;
+    function render(){
+        frame=null;if(page.hidden)return;
+        const progress=reduced.matches?0:Math.max(0,Math.min(1,scrollY/(mobile.matches?110:160)));
+        const eased=progress*progress*(3-2*progress);
+        star.style.opacity=String(1-eased);
+        star.style.transform=`scale(${1+eased*.7})`;
+    }
+    function schedule(){if(!page.hidden&&frame===null)frame=requestAnimationFrame(render);}
+    window.addEventListener('scroll',schedule,{passive:true});
+    window.addEventListener('resize',schedule,{passive:true});
+    reduced.addEventListener('change',schedule);
+    new MutationObserver(()=>{
+        if(page.hidden){if(frame!==null)cancelAnimationFrame(frame);frame=null;}
+        else schedule();
+    }).observe(page,{attributes:true,attributeFilter:['hidden']});
+    schedule();
+})();
+
+</script>
 </body>
 </html>
