@@ -1292,10 +1292,6 @@ body.dark-theme #music .music-destination-links a:hover { color: #eee9e2; text-d
 .artwork .artwork-description { max-width: 48ch; margin: 16px 0 0; color: #999; font-size: 14px; line-height: 1.75; }
 
 
-/* Portals: a direct link above the Programming Projects introduction. */
-#projects .projects-portal-button { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 22px; margin-bottom: 28px; border: 1px solid #353535; border-radius: 6px; background: #161616; color: #e5e5e5; font-size: 14px; text-decoration: none; transition: background-color .2s, border-color .2s; }
-#projects .projects-portal-button:hover { background: #242424; border-color: #666; }
-#projects .projects-portal-button:focus-visible { outline: 2px solid #aaa; outline-offset: 5px; }
 
 </style>
 <script type="importmap">
@@ -1527,15 +1523,27 @@ body.dark-theme #music .music-destination-links a:hover { color: #eee9e2; text-d
 
     <section id="projects" class="page" hidden aria-labelledby="projects-heading">
         <header class="projects-intro">
-            <a class="projects-portal-button" href="https://judah-j.github.io/portals/">Portals</a>
+
             <p class="tree-journey-kicker">A branch in code</p>
             <h1 id="projects-heading">Programming Projects.</h1>
             <!-- Edit this introduction as your collection grows. -->
             <p>Experiments in code, sound, and interaction.</p>
         </header>
+        <article class="project-feature" aria-labelledby="portals-heading">
+            <div class="project-feature-copy">
+                <p class="project-index">01 / Browser instrument</p>
+                <h2 id="portals-heading">Portals</h2>
+                <!-- Edit this description and add more links as the project grows. -->
+                <p class="project-description">An interactive instrument you can play directly in your browser.</p>
+                <nav class="project-links" aria-label="Portals links">
+                    <a href="https://judah-j.github.io/portals/">Open instrument</a>
+                </nav>
+            </div>
+            <!-- Add a project-demo figure here when the Portals video is ready. -->
+        </article>
         <article class="project-feature" aria-labelledby="harmony-wheel-heading">
             <div class="project-feature-copy">
-                <p class="project-index">01 / Interactive music</p>
+                <p class="project-index">02 / Interactive music</p>
                 <h2 id="harmony-wheel-heading">Harmony Wheel</h2>
                 <!-- Edit the description and technology list here. -->
                 <p class="project-description">A virtual instrument that turns hand movements into music. Explore connected chords and melodies, sustain and layer sounds, and build a drum track underneath.</p>
