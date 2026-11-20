@@ -257,20 +257,6 @@ p {
     border: 0;
 }
 
-/* RESUME: place resume.pdf beside index.html to fill this preview. */
-.resume-card { max-width: 900px; }
-.resume-preview {
-    display: block;
-    width: 100%;
-    height: 720px;
-    height: clamp(360px, 75vh, 850px);
-    margin-top: 24px;
-    border: 1px solid #d4d0c8;
-    box-sizing: border-box;
-    background: #fff;
-}
-.resume-preview p { padding: 24px; }
-
 /* STATEMENT BOXES: shared styling for artist and project statements. */
 .statement-box {
     max-width: 900px;
@@ -521,7 +507,6 @@ body.dark-theme .contact-link-primary:hover { background: #fff0f7; }
 body.dark-theme .contact-link-secondary { color: #eee7e3; }
 body.dark-theme .contact-link-secondary:hover { background: #363238; }
 body.dark-theme .contact-link:focus-visible { outline-color: #eee7e3; }
-body.dark-theme .resume-preview { background: #15131a; border-color: #3c303a; }
 body.dark-theme .music-outlets a { color: var(--music-ink); }
 
 /* Art Portfolio: black gallery surfaces and readable captions. */
@@ -643,7 +628,6 @@ body.dark-theme .artwork-image { background: #292a2b; border-radius: 8px; }
 body.dark-theme .artwork figcaption { border: 0; }
 body.dark-theme #art,
 body.dark-theme .artwork-title { color: #dedbd5; }
-body.dark-theme .resume-preview { background: #292a2b; border: 0; border-radius: 8px; }
 
 .prism-hint { color: #aaa69f; }
 #prism-beam { opacity: .28; }
@@ -700,7 +684,6 @@ body.dark-theme .contact-card,
 body.dark-theme .statement-box,
 body.dark-theme .listening-card,
 body.dark-theme .artwork-image,
-body.dark-theme .resume-preview { background: #101010; border: 0; }
 body.dark-theme .contact-card .contact-description,
 body.dark-theme .statement-box p,
 body.dark-theme .portfolio-intro,
@@ -1504,22 +1487,7 @@ body.dark-theme #music .music-destination-links a:hover { color: #eee9e2; text-d
 
             <p class="contact-address">Jujo7910@colorado.edu</p>
         </section>
-        <!-- RESUME: update the PDF filename in the links and preview when replacing your resume. -->
-        <section class="statement-box resume-card" aria-labelledby="resume-heading">
-            <h2 id="resume-heading">Curriculum Vitae</h2>
-            <p>My qualifications, experience, and skills.</p>
-                        <div class="contact-actions">
-                <a class="contact-link" href="judah%20jones%20resume-%20%20service%20industry.pdf" target="_blank" rel="noopener noreferrer">Open Curriculum Vitae PDF</a>
-                <a class="contact-link" href="judah%20jones%20resume-%20%20service%20industry.pdf" download>Download Curriculum Vitae</a>
-            </div>
-<object class="resume-preview" data="judah%20jones%20resume-%20%20service%20industry.pdf" type="application/pdf"
-                    aria-label="Judah Jones Curriculum Vitae PDF">
-                <p>Preview unavailable.
-                    <a href="judah%20jones%20resume-%20%20service%20industry.pdf" target="_blank" rel="noopener noreferrer">Open my Curriculum Vitae PDF</a>.
-                </p>
-            </object>
-        </section>
-    </section>
+</section>
 
     <section id="projects" class="page" hidden aria-labelledby="projects-heading">
         <header class="projects-intro">
