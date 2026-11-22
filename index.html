@@ -1276,6 +1276,22 @@ body.dark-theme #music .music-destination-links a:hover { color: #eee9e2; text-d
 
 
 
+
+/* Salt model: automatically load as the viewer approaches the viewport. */
+#projects .project-media { display: grid; gap: 32px; min-width: 0; align-content: start; }
+#projects .salt-model-panel { grid-column: 1 / -1; margin: 0; min-width: 0; }
+#projects .salt-model-toolbar { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; margin-bottom: 16px; color: #999; font: 11px/1.6 Arial,sans-serif; }
+#projects .salt-model-toolbar a { color: #bbb; text-underline-offset: 4px; }
+#projects .salt-model-stage { position: relative; display: grid; place-items: center; min-height: 280px; height: clamp(280px,52vw,600px); background: #111111; }
+#projects model-viewer { width: 100%; height: 100%; background: #111111; --poster-color: #111111; }
+#projects model-viewer[hidden] { display: none; }
+#projects #salt-model-status { margin: 14px 0 0; color: #999; font-size: 13px; line-height: 1.7; }
+
+#projects #salt-model-loading { position: absolute; margin: 0; padding: 24px; color: #999; font-size: 14px; text-align: center; pointer-events: none; }
+#projects #salt-model-loading[hidden] { display: none; }
+#projects .salt-project-description { margin-top: 24px; }
+#projects .salt-project-description p { margin: 0 0 16px; color: #aaa; font-size: 16px; line-height: 1.85; }
+
 </style>
 <script type="importmap">
 {
@@ -1497,6 +1513,44 @@ body.dark-theme #music .music-destination-links a:hover { color: #eee9e2; text-d
             <!-- Edit this introduction as your collection grows. -->
             <p>Experiments in code, sound, and interaction.</p>
         </header>
+        <article class="project-feature" aria-labelledby="salt-modeling-heading">
+            <div class="project-feature-copy">
+                <p class="project-index">03 / 3D modeling</p>
+                <h2 id="salt-modeling-heading">3D modeling for salt</h2>
+                <!-- Add your project description here. -->
+                <nav class="project-links" aria-label="3D modeling for salt links">
+                    <a href="https://youtu.be/QvhR_HgfZsY" target="_blank" rel="noopener noreferrer">Watch walkthrough</a>
+                </nav>
+            </div>
+            <div class="project-media">
+                <figure class="project-demo">
+                    <iframe src="https://www.youtube-nocookie.com/embed/QvhR_HgfZsY"
+                        title="3D modeling for salt walkthrough"
+                        width="800" height="450" loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <figcaption>3D modeling for salt / Project walkthrough</figcaption>
+                </figure>
+                <figure class="salt-model-panel" aria-labelledby="salt-model-caption">
+                    <figcaption class="salt-model-toolbar">
+                        <span id="salt-model-caption">Salt / Interactive 3D model</span>
+                        <a href="Models/salt-model.glb" download>Download model</a>
+                    </figcaption>
+                    <div class="salt-model-stage">
+                        <p id="salt-model-loading">Loading 3D model...</p>
+                        <model-viewer id="salt-model-viewer" alt="Salt architectural model with an arch and vine arch"
+                            camera-controls touch-action="pan-y" loading="eager" interaction-prompt="none"
+                            shadow-intensity="0.5" exposure="1"></model-viewer>
+                    </div>
+                    <p id="salt-model-status" role="status">Drag to rotate. Scroll or pinch to zoom.</p>
+                    <noscript><p>Enable JavaScript to explore the model, or use the video walkthrough above.</p></noscript>
+                    <div class="salt-project-description">
+                        <p>I used Polycam to 3D render the building, sending a GLB file to my Blender program on my laptop. I then modeled the archway and made a secondary model with vines as an idea for spring/summer integration.</p>
+                        <p>This project took me about 3 hours.</p>
+                    </div>
+                </figure>
+            </div>
+        </article>
         <article class="project-feature" aria-labelledby="portals-heading">
             <div class="project-feature-copy">
                 <p class="project-index">02 / Browser instrument</p>
@@ -2686,6 +2740,46 @@ window.SiteMotion = (() => {
     schedule();
 })();
 
+</script>
+
+<script>
+/* Automatically load the Salt model near the viewport; no start button. */
+(() => {
+    const viewer=document.getElementById('salt-model-viewer');
+    const stage=viewer.closest('.salt-model-stage');
+    const page=document.getElementById('projects');
+    const loading=document.getElementById('salt-model-loading');
+    const status=document.getElementById('salt-model-status');
+    let started=false;
+    function failed(){
+        loading.hidden=false;loading.textContent='3D preview unavailable';
+        status.textContent='Refresh to retry, download the model, or watch the walkthrough above.';
+    }
+    viewer.addEventListener('load',()=>{
+        loading.hidden=true;
+        status.textContent='Drag to rotate. Scroll or pinch to zoom. On mobile, swipe vertically to scroll the page.';
+    });
+    viewer.addEventListener('error',failed);
+    async function load(){
+        if(started||page.hidden)return;
+        started=true;
+        status.textContent='Loading the interactive model. This may take a moment.';
+        try{
+            await import('https://cdn.jsdelivr.net/npm/@google/model-viewer@4.1.0/dist/model-viewer.min.js');
+            await customElements.whenDefined('model-viewer');
+            viewer.setAttribute('src','Models/salt-model.glb');
+        }catch{failed();}
+    }
+    if('IntersectionObserver'in window){
+        const observer=new IntersectionObserver(entries=>{
+            if(entries.some(entry=>entry.isIntersecting)&&!page.hidden){load();observer.disconnect();}
+        },{rootMargin:'300px'});
+        observer.observe(stage);
+    }else{
+        new MutationObserver(()=>{if(!page.hidden)load();}).observe(page,{attributes:true,attributeFilter:['hidden']});
+        if(!page.hidden)load();
+    }
+})();
 </script>
 </body>
 </html>
